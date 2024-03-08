@@ -1,0 +1,60 @@
+{
+  "name": "reminder-mailer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/reminder-mailer/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/reminder-mailer",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/reminder-mailer/src/main.ts",
+        "tsConfig": "apps/reminder-mailer/tsconfig.app.json",
+        "assets": ["apps/reminder-mailer/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "reminder-mailer:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "reminder-mailer:build:development"
+        },
+        "production": {
+          "buildTarget": "reminder-mailer:build:production"
+        }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/reminder-mailer/Dockerfile . -t reminder-mailer"
+    }
+  },
+  "tags": []
+}
