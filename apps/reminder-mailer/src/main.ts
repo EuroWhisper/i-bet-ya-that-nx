@@ -2,6 +2,8 @@ import { PrismaClient, type Prediction } from '@prisma/client';
 import { Redis } from 'ioredis';
 import { Job, Queue, Worker } from 'bullmq';
 
+console.log('Hi');
+
 const connection = new Redis(process.env.REDIS_URL, {
   maxRetriesPerRequest: null,
 });
@@ -11,8 +13,6 @@ const databaseCheckQueue = new Queue('databaseCheckQueue', { connection });
 databaseCheckQueue.add('queuePredictions', null, {
   repeat: { pattern: '* * * * *' },
 });
-
-console.log('Hi');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const databaseCheckWorker = new Worker(
