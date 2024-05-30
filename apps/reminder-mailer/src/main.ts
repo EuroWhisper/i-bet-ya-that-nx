@@ -6,12 +6,13 @@ console.log('Hi');
 
 const connection = new Redis(process.env.REDIS_URL, {
   maxRetriesPerRequest: null,
+  enableOfflineQueue: false,
 });
 
 const databaseCheckQueue = new Queue('databaseCheckQueue', { connection });
 
 databaseCheckQueue.add('queuePredictions', null, {
-  repeat: { pattern: '* * * * *' },
+  repeat: { pattern: '0 * * * *' }, // Check for new entries every hour
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -41,14 +42,16 @@ async function queuePredictions() {
   try {
     const predictions = await prisma.prediction.findMany();
 
-    reminderQueue.addBulk(
-      predictions.map((prediction) => ({
-        name: prediction.id.toString(),
-        data: prediction,
-        opts: { delay: Number(prediction.reminderDate) - Date.now() },
-      }))
-    );
-  } catch {
-    console.error('Error');
+    if (predictions.length > 0) {
+      await reminderQueue.addBulk(
+        predictions.map((prediction) => ({
+          name: prediction.id.toString(),
+          data: prediction,
+          opts: { delay: Number(prediction.reminderDate) - Date.now() },
+        }))
+      );
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
 }
