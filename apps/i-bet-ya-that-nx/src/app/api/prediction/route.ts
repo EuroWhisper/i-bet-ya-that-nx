@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
         prediction: body.prediction,
         email: body.email,
         reminderDate: body.reminderDate,
+        reminderSent: false,
       },
     });
     return NextResponse.json({ message: 'Prediction created' });
