@@ -1,4 +1,4 @@
-import { getPredictionSuggestion } from '@/lib/chatgpt';
+import { getPredictionSuggestion } from '@i-bet-ya-that-nx/chatgpt';
 import { NextResponse } from 'next/server';
 
 type Data = {
