@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@i-bet-ya-that-nx/chatgpt": ["libs/chatgpt/src/index.ts"],
       "@i-bet-ya-that-nx/prisma-shared": ["libs/prisma-shared/src/index.ts"]
     }
   },

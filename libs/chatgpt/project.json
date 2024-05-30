@@ -1,0 +1,8 @@
+{
+  "name": "chatgpt",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/chatgpt/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}
