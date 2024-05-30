@@ -2,7 +2,9 @@
   "name": "@i-bet-ya-that-nx/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "prisma generate"
+  },
   "private": true,
   "prisma": {
     "schema": "./libs/prisma-shared/prisma/schema.prisma"
