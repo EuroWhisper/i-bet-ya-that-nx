@@ -2,10 +2,10 @@ name: Deploy reminder-mailer to Fly.io
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
-  deploy:
+  deploy-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
