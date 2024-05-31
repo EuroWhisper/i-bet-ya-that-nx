@@ -1,20 +1,31 @@
 import { PrismaClient, type Prediction } from '@prisma/client';
-import { Redis } from 'ioredis';
 import { Job, Queue, Worker } from 'bullmq';
+import IORedis from 'ioredis';
 
 console.log('Running reminder mailer...');
 
-const connection = new Redis(process.env.REDIS_URL, {
+const connection = new IORedis(process.env.REDIS_URL, {
   maxRetriesPerRequest: null,
   enableOfflineQueue: false,
 });
 
 const databaseCheckQueue = new Queue('databaseCheckQueue', { connection });
 
-databaseCheckQueue.add('queuePredictions', null, {
-  repeat: { pattern: '0 0 * * * *' }, // Check for new entries every hour
-});
+async function clearAndSetupRepeatableJob() {
+  // Clear all jobs from the queue
+  await databaseCheckQueue.obliterate({ force: true });
+  console.log('All jobs cleared from the queue.');
 
+  // Add new repeatable job
+  await databaseCheckQueue.add('queuePredictions', null, {
+    repeat: { pattern: '0 0 * * * *' }, // Check for new entries every hour on the hour
+  });
+  console.log('New repeatable job added with cron: 0 0 * * * *');
+}
+
+clearAndSetupRepeatableJob();
+
+databaseCheckQueue.getRepeatableJobs().then((jobs) => console.log(jobs));
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const databaseCheckWorker = new Worker(
   'databaseCheckQueue',
@@ -22,7 +33,13 @@ const databaseCheckWorker = new Worker(
     console.log('Checking database for new predictions');
     await queuePredictions();
   },
-  { connection }
+  {
+    connection,
+    limiter: {
+      max: 10, // Max number of jobs processed per interval
+      duration: 1000 * 60, // Interval duration in milliseconds
+    },
+  }
 );
 
 const reminderQueue = new Queue('reminderQueue', { connection });
@@ -33,7 +50,13 @@ const reminderWorker = new Worker(
   async (job: Job<Prediction>) => {
     console.log(job.data);
   },
-  { connection }
+  {
+    connection,
+    limiter: {
+      max: 10, // Max number of jobs processed per interval
+      duration: 1000 * 60, // Interval duration in milliseconds
+    },
+  }
 );
 
 const prisma = new PrismaClient();
