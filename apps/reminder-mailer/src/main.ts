@@ -12,7 +12,7 @@ const connection = new Redis(process.env.REDIS_URL, {
 const databaseCheckQueue = new Queue('databaseCheckQueue', { connection });
 
 databaseCheckQueue.add('queuePredictions', null, {
-  repeat: { pattern: '0 * * * *' }, // Check for new entries every hour
+  repeat: { pattern: '0 0 * * * *' }, // Check for new entries every hour
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
