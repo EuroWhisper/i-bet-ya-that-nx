@@ -10,12 +10,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: npm install
+        working-directory: .
+
       - name: Install NX
         run: npm install -g nx
 
       - name: Build Node App
         run: nx build reminder-mailer
-        working-directory: apps/reminder-mailer
+        working-directory: .
 
       - name: Setup flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
