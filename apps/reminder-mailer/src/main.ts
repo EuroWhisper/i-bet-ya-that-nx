@@ -2,7 +2,7 @@ import { PrismaClient, type Prediction } from '@prisma/client';
 import { Redis } from 'ioredis';
 import { Job, Queue, Worker } from 'bullmq';
 
-console.log('Hi');
+console.log('Running reminder mailer...');
 
 const connection = new Redis(process.env.REDIS_URL, {
   maxRetriesPerRequest: null,
