@@ -8,14 +8,11 @@ jobs:
   deploy-backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: .
-
-      - name: Install NX
-        run: npm install -g nx
 
       - name: Build Node App
         run: nx build reminder-mailer
