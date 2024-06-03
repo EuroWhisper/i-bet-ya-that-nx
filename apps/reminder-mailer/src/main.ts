@@ -18,14 +18,13 @@ async function clearAndSetupRepeatableJob() {
 
   // Add new repeatable job
   await databaseCheckQueue.add('queuePredictions', null, {
-    repeat: { pattern: '0 0 * * * *' }, // Check for new entries every hour on the hour
+    repeat: { pattern: '*/10 * * * *' }, // Check for new entries every 10 minutes
   });
   console.log('New repeatable job added with cron: 0 0 * * * *');
 }
 
 clearAndSetupRepeatableJob();
 
-databaseCheckQueue.getRepeatableJobs().then((jobs) => console.log(jobs));
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const databaseCheckWorker = new Worker(
   'databaseCheckQueue',
@@ -35,10 +34,6 @@ const databaseCheckWorker = new Worker(
   },
   {
     connection,
-    limiter: {
-      max: 10, // Max number of jobs processed per interval
-      duration: 1000 * 60, // Interval duration in milliseconds
-    },
   }
 );
 
@@ -48,14 +43,12 @@ const reminderQueue = new Queue('reminderQueue', { connection });
 const reminderWorker = new Worker(
   'reminderQueue',
   async (job: Job<Prediction>) => {
-    console.log(job.data);
+    console.log('Processing job:', job.data);
+
+    console.log('Sending reminder email...');
   },
   {
     connection,
-    limiter: {
-      max: 10, // Max number of jobs processed per interval
-      duration: 1000 * 60, // Interval duration in milliseconds
-    },
   }
 );
 
