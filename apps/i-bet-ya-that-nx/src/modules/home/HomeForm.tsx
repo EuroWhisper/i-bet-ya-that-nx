@@ -60,6 +60,7 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
               label="Verify on"
               type="date"
               name="confirmationDate"
+              labelClassName="text-white"
               placeholder="Date"
               rules={{ required: 'Date is required' }}
             />

@@ -7,7 +7,12 @@ type Props = {
 
 export const Card = ({ className, children }: Props) => {
   return (
-    <div className={clsx('p-4 rounded-md bg-white text-gray-800', className)}>
+    <div
+      className={clsx(
+        'p-4 rounded-md bg-white text-gray-800 shadow-md',
+        className
+      )}
+    >
       {children}
     </div>
   );

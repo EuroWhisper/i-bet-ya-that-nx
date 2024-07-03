@@ -19,7 +19,9 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
           height={320}
           priority
         />
-        <h1 className="font-fugaz text-6xl mt-4">I bet ya that...</h1>
+        <h1 className="font-fugaz text-6xl text-white mt-4">
+          I bet ya that...
+        </h1>
         <div className="mt-8 w-[32rem]">
           <HomeForm predictionSuggestion={predictionSuggestion} />
         </div>
