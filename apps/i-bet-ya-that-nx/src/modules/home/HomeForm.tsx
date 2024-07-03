@@ -42,6 +42,7 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
           new Date(data.confirmationDate),
           data.email
         );
+        formMethods.reset(defaultValues);
         setOpen(true);
       }}
     >
