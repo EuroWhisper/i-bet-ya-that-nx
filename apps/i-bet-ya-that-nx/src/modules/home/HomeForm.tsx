@@ -6,6 +6,7 @@ import { HomeFormData } from './types';
 import { Button } from '../../components/Button';
 import { useEffect, useState } from 'react';
 import { Toast } from '../../components/Toast';
+import { createPrediction } from '../../app/actions';
 
 type Props = {
   predictionSuggestion: string;
@@ -36,14 +37,11 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
     <Form
       formMethods={formMethods}
       onSubmit={async (data) => {
-        await fetch('/api/prediction', {
-          method: 'POST',
-          body: JSON.stringify({
-            prediction: data.prediction,
-            reminderDate: new Date(data.confirmationDate),
-            email: data.email,
-          }),
-        });
+        await createPrediction(
+          data.prediction,
+          new Date(data.confirmationDate),
+          data.email
+        );
         setOpen(true);
       }}
     >
