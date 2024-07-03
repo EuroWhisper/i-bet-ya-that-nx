@@ -20,7 +20,10 @@ const getExistingPredictions = cache(
     const prisma = new PrismaClient();
 
     try {
-      const predictions = await prisma.prediction.findMany({ take });
+      const predictions = await prisma.prediction.findMany({
+        take,
+        orderBy: { createdAt: 'desc' },
+      });
       const emailObfuscatedPredictions = predictions.map((prediction) => ({
         ...prediction,
         email: prediction.email.replace(
@@ -42,7 +45,7 @@ const getExistingPredictions = cache(
 );
 
 export default async function Home() {
-  const TAKE_LAST_FOUR_PREDICTIONS = -4;
+  const TAKE_LAST_FOUR_PREDICTIONS = 4;
   const predictionSuggestion = await getData();
   const existingPredictions = await getExistingPredictions(
     TAKE_LAST_FOUR_PREDICTIONS

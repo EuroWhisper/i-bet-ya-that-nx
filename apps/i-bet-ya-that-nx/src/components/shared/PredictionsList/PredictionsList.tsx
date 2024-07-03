@@ -1,21 +1,21 @@
 import { Prediction } from '@prisma/client';
-import { Stack } from '../../common/Stack/Stack';
 import { PredictionCard } from '../PredictionCard/PredictionCard';
-
+import { formatDate } from '../../../app/utils';
 type Props = {
   predictions: Prediction[];
 };
 
 export const PredictionsList = ({ predictions }: Props) => {
   return (
-    <Stack gap={3}>
+    <div className="grid grid-cols-4 gap-4">
       {predictions.map((prediction) => (
         <PredictionCard
           key={prediction.id}
           email={prediction.email}
           prediction={prediction.prediction}
+          date={formatDate(prediction.reminderDate)}
         />
       ))}
-    </Stack>
+    </div>
   );
 };
