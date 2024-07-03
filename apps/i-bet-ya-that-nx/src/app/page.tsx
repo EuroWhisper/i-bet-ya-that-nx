@@ -21,7 +21,15 @@ const getExistingPredictions = cache(
 
     try {
       const predictions = await prisma.prediction.findMany({ take });
-      return predictions;
+      const emailObfuscatedPredictions = predictions.map((prediction) => ({
+        ...prediction,
+        email: prediction.email.replace(
+          /^(.)(.*)(.@.*)$/,
+          (_, first, middle, last) =>
+            `${first}${middle.replace(/./g, '*')}${last}`
+        ),
+      }));
+      return emailObfuscatedPredictions;
     } catch (e) {
       console.log(e);
       return null;
