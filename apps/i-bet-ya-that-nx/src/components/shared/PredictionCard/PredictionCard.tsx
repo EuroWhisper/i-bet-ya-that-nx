@@ -11,11 +11,13 @@ export const PredictionCard = ({ email, prediction, date }: Props) => {
   return (
     <Card>
       <Stack gap={3}>
-        <Stack>
-          <h3 className="text-lg font-bold">{email}</h3>
-          <p className="text-sm text-blue-400">{date}</p>
+        <Stack gap={1}>
+          <p className="text-sm text-gray-600 font-bold">{email}</p>
+          <h3 className="text-xs text-gray-400">{date}</h3>
         </Stack>
-        <p className="text-gray-600">{prediction}</p>
+        <div className="">
+          <p className="text-gray-600  line-clamp-3">{prediction}</p>
+        </div>
       </Stack>
     </Card>
   );
