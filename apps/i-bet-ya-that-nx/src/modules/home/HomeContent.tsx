@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { HomeForm } from './HomeForm';
 import { Prediction } from '@prisma/client';
 import { PredictionsList } from '../../components/shared/PredictionsList/PredictionsList';
+import { Sheet } from '../../components/common/Sheet/Sheet';
+import { PageSection } from '../../components/shared/PageSection/PageSection';
 
 type Props = {
   existingPredictions: Prediction[] | null;
@@ -26,12 +28,13 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
           <HomeForm predictionSuggestion={predictionSuggestion} />
         </div>
       </div>
-      {existingPredictions && (
-        <div>
-          <h2 className="text-2xl mt-8">Latest predictions</h2>
-          <PredictionsList predictions={existingPredictions} />
-        </div>
-      )}
+      <Sheet>
+        {existingPredictions && (
+          <PageSection title="Latest predictions">
+            <PredictionsList predictions={existingPredictions} />
+          </PageSection>
+        )}
+      </Sheet>
     </main>
   );
 };

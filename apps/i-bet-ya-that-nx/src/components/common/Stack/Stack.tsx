@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
 type Props = {
+  as?: React.ElementType;
   horizontal?: boolean;
   horizontalAlign?: keyof typeof justifyContentMap;
   verticalAlign?: keyof typeof alignItemsMap;
@@ -67,6 +68,7 @@ const gapMap: Record<number, string> = {
 };
 
 export const Stack = ({
+  as,
   horizontal = false,
   horizontalAlign,
   verticalAlign,
@@ -74,6 +76,8 @@ export const Stack = ({
   className,
   children,
 }: Props) => {
+  const Component = as ?? 'div';
+
   const flexDirectionClass = horizontal ? 'flex-row' : 'flex-col';
   const justifyContentClass = horizontalAlign
     ? justifyContentMap[horizontalAlign]
@@ -82,7 +86,7 @@ export const Stack = ({
   const gapClass = gap !== undefined ? gapMap[gap] : '';
 
   return (
-    <div
+    <Component
       className={clsx(
         'flex',
         flexDirectionClass,
@@ -93,6 +97,6 @@ export const Stack = ({
       )}
     >
       {children}
-    </div>
+    </Component>
   );
 };
