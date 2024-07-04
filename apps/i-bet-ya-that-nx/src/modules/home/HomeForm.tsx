@@ -54,21 +54,25 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
       />
       {shouldShowFullForm && (
         <div>
-          <div className="mt-3 flex justify-between items-end">
-            <InputField
-              label="Verify on"
-              type="date"
-              name="confirmationDate"
-              labelClassName="text-white"
-              placeholder="Date"
-              rules={{ required: 'Date is required' }}
-            />
-            <InputField
-              type="email"
-              name="email"
-              placeholder="Email"
-              rules={{ required: 'Email is required' }}
-            />
+          <div className="mt-3 flex justify-between items-end gap-4">
+            <div className="w-full">
+              <InputField
+                label="Verify on"
+                type="date"
+                name="confirmationDate"
+                labelClassName="text-white"
+                placeholder="Date"
+                rules={{ required: 'Date is required' }}
+              />
+            </div>
+            <div className="w-full">
+              <InputField
+                type="email"
+                name="email"
+                placeholder="Email"
+                rules={{ required: 'Email is required' }}
+              />
+            </div>
           </div>
           <div className="mt-4">
             <Button type="submit">Make prediction</Button>
