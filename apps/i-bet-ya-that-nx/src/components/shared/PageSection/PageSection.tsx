@@ -1,4 +1,4 @@
-import { Stack } from '../../common/Stack/Stack';
+import { Stack } from '../../../../../../libs/ui-common/src/lib/Stack/Stack';
 
 type Props = {
   as?: React.ElementType;

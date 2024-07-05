@@ -1,5 +1,5 @@
-import { Card } from '../../common/Card/Card';
-import { Stack } from '../../common/Stack/Stack';
+import { Stack } from '@i-bet-ya-that-nx/ui-common';
+import { Card } from '@i-bet-ya-that-nx/ui-common';
 
 type Props = {
   email: string;

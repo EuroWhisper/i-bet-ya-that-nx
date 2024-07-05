@@ -31,7 +31,7 @@
     "next-env.d.ts",
     "../../libs/chatgpt/src/lib/rate-limiter.ts",
     ".next/types/**/*.ts"
-  ],
+, "../../libs/ui-common/src/lib/Toast/Toast.tsx", "../../libs/ui-common/src/lib/Toast/ToastViewport.tsx"  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",

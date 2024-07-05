@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
-import { ToastViewport } from '../components/ToastViewport';
+import { ToastViewport } from '@i-bet-ya-that-nx/ui-common';
 import clsx from 'clsx';
 
 const inter = Inter({ subsets: ['latin'] });

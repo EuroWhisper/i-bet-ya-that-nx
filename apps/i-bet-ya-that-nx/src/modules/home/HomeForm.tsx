@@ -3,9 +3,9 @@
 import { InputField } from '../../components/form/InputField';
 import { Form, useForm } from '../../components/form/Form';
 import { HomeFormData } from './types';
-import { Button } from '../../components/Button';
+import { Button } from '@i-bet-ya-that-nx/ui-common'
 import { useEffect, useState } from 'react';
-import { Toast } from '../../components/Toast';
+import { Toast } from '@i-bet-ya-that-nx/ui-common';
 import { createPrediction } from '../../app/actions';
 
 type Props = {

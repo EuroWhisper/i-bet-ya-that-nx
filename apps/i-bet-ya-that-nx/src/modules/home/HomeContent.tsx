@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { HomeForm } from './HomeForm';
 import { Prediction } from '@prisma/client';
 import { PredictionsList } from '../../components/shared/PredictionsList/PredictionsList';
-import { Sheet } from '../../components/common/Sheet/Sheet';
+import { Sheet } from '@i-bet-ya-that-nx/ui-common';
 import { PageSection } from '../../components/shared/PageSection/PageSection';
 
 type Props = {

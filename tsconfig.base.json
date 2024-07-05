@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@i-bet-ya-that-nx/chatgpt": ["libs/chatgpt/src/index.ts"],
-      "@i-bet-ya-that-nx/prisma-shared": ["libs/prisma-shared/src/index.ts"]
+      "@i-bet-ya-that-nx/prisma-shared": ["libs/prisma-shared/src/index.ts"],
+      "@i-bet-ya-that-nx/ui-common": ["libs/ui-common/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
