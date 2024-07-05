@@ -2,6 +2,15 @@
 
 I Bet Ya That is a web application that allows users to make predictions about future events and eventually bet virtual points (no real money involved) on the outcomes of those predictions. Users can create predictions, make bets on those predictions, and receive reminders about the predictions they have made. Leaderboards will be implemented to show the users with the most points.
 
+## Installation
+First you need to run the following command to install nx globally: 
+`npm add --global nx@latest`
+
+Then, from the root directory of the repository, run the classic:
+`npm i`
+
+After that, follow the instructions below to get whichever service you need to work on running locally.
+
 ## i-bet-ya-that-nx
 
 This is the main application for the i-bet-ya-that project. It is a [Next.js](https://nextjs.org/) application that provides the frontend for the project, as well as the API for the project.
