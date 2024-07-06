@@ -3,7 +3,8 @@
 I Bet Ya That is a web application that allows users to make predictions about future events and eventually bet virtual points (no real money involved) on the outcomes of those predictions. Users can create predictions, make bets on those predictions, and receive reminders about the predictions they have made. Leaderboards will be implemented to show the users with the most points.
 
 ## Installation
-First you need to run the following command to install nx globally: 
+
+First you need to run the following command to install nx globally:
 `npm add --global nx@latest`
 
 Then, from the root directory of the repository, run the classic:
@@ -48,7 +49,7 @@ Themeing: To prevent a flicker on hydration, we use the next-themes library to s
 
 ## Reminder mailer
 
-The reminder mailer service is a service that checks the database for reminders that are due to be sent and sends them to the user's email address. The service uses [Redis](https://redis.io/) and [BullMQ](https://docs.bullmq.io/) to manage the queue of reminders to be sent.
+The reminder mailer service is a service that checks the database for reminders that are due to be sent and sends them to the user's email address. The service uses [Redis](https://redis.io/) and [BullMQ](https://docs.bullmq.io/) to manage the queue of reminders to be sent, and [Mailersend](https://www.mailersend.com/) to send the reminder emails.
 
 ### Environment variables
 
@@ -56,6 +57,10 @@ The reminder mailer service requires the following environment variables to be s
 
 Redis local connection string:
 `REDIS_URL="redis://localhost:6379"`
+
+Mailersend API key and sender address:
+`MAILERSEND_API=[Mailsend API key]`
+`MAILERSEND_SENDER=[<sender>@<mailersend-domain>.com]`
 
 Connect to Supabase via connection pooling with Supavisor.
 `DATABASE_URL=[Postgres connection string]`

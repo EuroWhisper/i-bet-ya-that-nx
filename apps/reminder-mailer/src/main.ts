@@ -1,6 +1,13 @@
 import { PrismaClient, type Prediction } from '@prisma/client';
 import { Job, Queue, Worker } from 'bullmq';
 import IORedis from 'ioredis';
+import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend';
+
+const mailerSend = new MailerSend({
+  apiKey: process.env.MAILERSEND_API,
+});
+
+const sentFrom = new Sender(process.env.MAILERSEND_SENDER);
 
 console.log('Running reminder mailer...');
 
@@ -46,6 +53,26 @@ const reminderWorker = new Worker(
     console.log('Processing job:', job.data);
 
     console.log('Sending reminder email...');
+
+    const recipient = new Recipient(job.data.email);
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo([recipient])
+      .setReplyTo(sentFrom)
+      .setSubject('This is a Subject')
+      .setHtml('<strong>This is the HTML content</strong>')
+      .setText('This is the text content');
+
+    try {
+      await mailerSend.email.send(emailParams);
+      await prisma.prediction.update({
+        where: { id: job.data.id },
+        data: { reminderSent: true },
+      });
+    } catch (e) {
+      console.log(e);
+    }
   },
   {
     connection,
@@ -56,7 +83,9 @@ const prisma = new PrismaClient();
 
 async function queuePredictions() {
   try {
-    const predictions = await prisma.prediction.findMany();
+    const predictions = await prisma.prediction.findMany({
+      where: { reminderSent: false },
+    });
 
     if (predictions.length > 0) {
       await reminderQueue.addBulk(
