@@ -9,12 +9,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "@next/next/no-html-link-for-pages": [
-          "error",
-          "apps/i-bet-ya-that-nx/pages"
-        ]
-      }
+      "rules": { "@next/next/no-html-link-for-pages": "off" }
     },
     {
       "files": ["*.ts", "*.tsx"],
@@ -30,5 +25,31 @@
         "jest": true
       }
     }
-  ]
+  ],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^\\u0000"], // Side effect imports
+          ["^(react|react-dom)(/.*|$)", "^(next)(/.*|$)", "^@?\\w"], // Packages
+          ["^(src)(/.*|$)"], // Internal packages
+          ["^"], // Absolute imports and other imports
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"], // Parent imports
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"], // Relative imports
+          ["^.+\\.s?css$"] // Style imports
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "callbacksLast": true,
+        "reservedFirst": true,
+        "shorthandLast": true
+      }
+    ]
+  }
 }
