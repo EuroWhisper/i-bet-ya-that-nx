@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { forwardRef } from 'react';
 import type { ToastProps } from '@radix-ui/react-toast';
 import * as ToastPrimitive from '@radix-ui/react-toast';

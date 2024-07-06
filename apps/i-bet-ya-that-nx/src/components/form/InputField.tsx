@@ -1,7 +1,8 @@
+import { forwardRef } from 'react';
 import { UseControllerProps } from 'react-hook-form';
+
 import { useController } from './Form';
 import { Input } from './Input';
-import { forwardRef } from 'react';
 
 type Props = {
   name: string;
@@ -17,7 +18,7 @@ const InputField = forwardRef<HTMLInputElement, Props>(
     return (
       <div>
         {props.label && (
-          <label htmlFor={name} className={labelClassName}>
+          <label className={labelClassName} htmlFor={name}>
             {props.label}
           </label>
         )}

@@ -7,7 +7,7 @@ import {
   UseFormReturn,
 } from 'react-hook-form';
 
-export { useForm, useController } from 'react-hook-form';
+export { useController, useForm } from 'react-hook-form';
 
 export type FieldValuesType = FieldValues;
 

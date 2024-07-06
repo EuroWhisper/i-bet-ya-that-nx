@@ -1,12 +1,14 @@
 'use client';
 
-import { InputField } from '../../components/form/InputField';
-import { Form, useForm } from '../../components/form/Form';
-import { HomeFormData } from './types';
-import { Button } from '@i-bet-ya-that-nx/ui-common'
 import { useEffect, useState } from 'react';
+import { Button } from '@i-bet-ya-that-nx/ui-common';
 import { Toast } from '@i-bet-ya-that-nx/ui-common';
+
 import { createPrediction } from '../../app/actions';
+import { Form, useForm } from '../../components/form/Form';
+import { InputField } from '../../components/form/InputField';
+
+import { HomeFormData } from './types';
 
 type Props = {
   predictionSuggestion: string;
@@ -47,10 +49,10 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
       }}
     >
       <InputField
-        type="text"
         name="prediction"
         placeholder={predictionSuggestion}
         rules={{ required: 'Prediction is required' }}
+        type="text"
       />
       {shouldShowFullForm && (
         <div>
@@ -58,19 +60,19 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
             <div className="w-full">
               <InputField
                 label="Verify on"
-                type="date"
-                name="confirmationDate"
                 labelClassName="text-white"
+                name="confirmationDate"
                 placeholder="Date"
                 rules={{ required: 'Date is required' }}
+                type="date"
               />
             </div>
             <div className="w-full">
               <InputField
-                type="email"
                 name="email"
                 placeholder="Email"
                 rules={{ required: 'Email is required' }}
+                type="email"
               />
             </div>
           </div>
