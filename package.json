@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "email-dev": "cd libs/email-templates/src/lib && email dev"
   },
   "private": true,
   "prisma": {
@@ -12,6 +13,7 @@
   "dependencies": {
     "@prisma/client": "^5.9.1",
     "@radix-ui/react-toast": "^1.1.5",
+    "@react-email/components": "0.0.21",
     "axios": "^1.6.0",
     "bottleneck": "^2.19.5",
     "bullmq": "^5.7.14",
@@ -24,6 +26,7 @@
     "openai": "^4.47.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-email": "2.1.5",
     "react-hook-form": "^7.51.5",
     "tslib": "^2.3.0"
   },

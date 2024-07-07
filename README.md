@@ -85,6 +85,16 @@ After starting the redis server, you can start the reminder mailer service by ru
 
 The prisma-shared library is a shared library that contains the Prisma client and the Prisma schema. It is used by the i-bet-ya-that-nx and reminder-mailer services to interact with the database. The schema is defined in the `schema.prisma` file and is the single source of truth for the database schema. The generated data types as well as the Prisma client are exported from the library, so they can be reused wherever necessary, avoiding duplicate types and schema files.
 
+### ui-common
+
+The ui-common library is a library that houses highly reusable UI components (Button, Text, Card etc...).
+
+### email-templates
+
+The email-templates library contains the templates used by email sending services. It uses the [react-email](https://react.email/) library.
+To preview changes while working on email template componenets, run:
+`npm run email-dev`
+
 ### chatgpt
 
 The chatgpt library is a library that contains functions to fetch prediction suggestions and will eventually contain functions to check whether a prediction is correct or not. It is used by the i-bet-ya-that-nx service to interact with the OpenAI API.
