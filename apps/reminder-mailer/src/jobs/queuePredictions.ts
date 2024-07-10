@@ -1,10 +1,11 @@
+import { VerificationStatus } from '@prisma/client';
 import { prisma } from '../database';
 import { reminderQueue } from '../queues';
 
 export async function queuePredictions() {
   try {
     const predictions = await prisma.prediction.findMany({
-      where: { reminderSent: false },
+      where: { verificationStatus: VerificationStatus.PENDING },
     });
 
     if (predictions.length > 0) {

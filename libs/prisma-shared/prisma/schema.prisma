@@ -8,6 +8,13 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum VerificationStatus {
+  PENDING
+  REMINDER_EMAIL_SENT
+  VERIFIED_CORRECT
+  VERIFIED_INCORRECT
+}
+
 model Prediction {
   id           Int      @id @default(autoincrement())
   createdAt    DateTime @default(now())
@@ -15,5 +22,6 @@ model Prediction {
   prediction   String
   email        String
   reminderDate DateTime
-  reminderSent Boolean
+  verificationStatus VerificationStatus @default(PENDING)
+  verificationToken  String  @default(dbgenerated("gen_random_uuid()")) @unique
 }

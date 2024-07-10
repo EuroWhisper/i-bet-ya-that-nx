@@ -3,7 +3,7 @@ import { render } from '@react-email/components';
 import { prisma } from '../database';
 import { sendReminderEmail } from '../email';
 import { ReminderEmailTemplate } from '@i-bet-ya-that-nx/email-templates';
-import { Prediction } from '@prisma/client';
+import { Prediction, VerificationStatus } from '@prisma/client';
 
 export async function processReminderJob(job: Job<Prediction>) {
   console.log('Processing job:', job.data);
@@ -25,7 +25,7 @@ export async function processReminderJob(job: Job<Prediction>) {
     );
     await prisma.prediction.update({
       where: { id: job.data.id },
-      data: { reminderSent: true },
+      data: { verificationStatus: VerificationStatus.REMINDER_EMAIL_SENT },
     });
   } catch (e) {
     console.log(e);
