@@ -1,5 +1,5 @@
-import { getPredictionSuggestion } from '@i-bet-ya-that-nx/chatgpt';
 import { NextResponse } from 'next/server';
+import { getPredictionSuggestion } from '@i-bet-ya-that-nx/chatgpt';
 
 type Data = {
   message: string;

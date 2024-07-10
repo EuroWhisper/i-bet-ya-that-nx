@@ -1,7 +1,8 @@
-import { getPredictionSuggestion } from '@i-bet-ya-that-nx/chatgpt';
-import { HomeContent } from '../modules/home/HomeContent';
-import { PrismaClient } from '@prisma/client';
 import { unstable_cache as cache } from 'next/cache';
+import { getPredictionSuggestion } from '@i-bet-ya-that-nx/chatgpt';
+import { PrismaClient } from '@prisma/client';
+
+import { HomeContent } from '../modules/home/HomeContent';
 
 export const dynamic = 'force-dynamic';
 

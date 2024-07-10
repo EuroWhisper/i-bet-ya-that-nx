@@ -1,9 +1,11 @@
 import Image from 'next/image';
-import { HomeForm } from './HomeForm';
-import { Prediction } from '@prisma/client';
-import { PredictionsList } from '../../components/shared/PredictionsList/PredictionsList';
 import { Sheet } from '@i-bet-ya-that-nx/ui-common';
+import { Prediction } from '@prisma/client';
+
 import { PageSection } from '../../components/shared/PageSection/PageSection';
+import { PredictionsList } from '../../components/shared/PredictionsList/PredictionsList';
+
+import { HomeForm } from './HomeForm';
 
 type Props = {
   existingPredictions: Prediction[] | null;
@@ -16,9 +18,9 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
       <div className="flex min-h-screen flex-col items-center md:justify-center bg-gradient-to-br	from-[#FF4B12] to-[#4200FF]">
         <Image
           alt="Gambling doberman"
+          height={320}
           src="/mascot.svg"
           width={320}
-          height={320}
           priority
         />
         <h1 className="font-fugaz text-3xl md:text-6xl text-white mt-4">

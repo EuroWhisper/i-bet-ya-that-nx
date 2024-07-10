@@ -1,7 +1,7 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
 import { revalidateTag } from 'next/cache';
+import { PrismaClient } from '@prisma/client';
 
 export const createPrediction = async (
   prediction: string,
@@ -16,7 +16,6 @@ export const createPrediction = async (
         prediction: prediction,
         email: email,
         reminderDate: reminderDate,
-        reminderSent: false,
       },
     });
     revalidateTag('predictions');
