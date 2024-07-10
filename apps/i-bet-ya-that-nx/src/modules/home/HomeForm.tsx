@@ -7,6 +7,7 @@ import { Toast } from '@i-bet-ya-that-nx/ui-common';
 import { createPrediction } from '../../app/actions';
 import { Form, useForm } from '../../components/form/Form';
 import { InputField } from '../../components/form/InputField';
+import { useServerAction } from '../../hooks';
 
 import { HomeFormData } from './types';
 
@@ -21,6 +22,8 @@ const defaultValues: HomeFormData = {
 };
 
 const HomeForm = ({ predictionSuggestion }: Props) => {
+  const [executeAction, isPending] = useServerAction(createPrediction);
+
   const [open, setOpen] = useState(false);
 
   const formMethods = useForm<HomeFormData>({
@@ -39,7 +42,7 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
     <Form
       formMethods={formMethods}
       onSubmit={async (data) => {
-        await createPrediction(
+        await executeAction(
           data.prediction,
           new Date(data.confirmationDate),
           data.email
@@ -77,7 +80,9 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
             </div>
           </div>
           <div className="mt-4">
-            <Button type="submit">Make prediction</Button>
+            <Button disabled={isPending} type="submit">
+              Make prediction
+            </Button>
           </div>
         </div>
       )}
