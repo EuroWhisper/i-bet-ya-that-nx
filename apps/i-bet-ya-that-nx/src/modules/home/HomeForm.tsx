@@ -22,7 +22,7 @@ const defaultValues: HomeFormData = {
 };
 
 const HomeForm = ({ predictionSuggestion }: Props) => {
-  const [executeAction, isPending] = useServerAction(createPrediction);
+  const { executeAction, isPending } = useServerAction(createPrediction);
 
   const [open, setOpen] = useState(false);
 

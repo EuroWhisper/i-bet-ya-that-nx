@@ -68,6 +68,11 @@ Connect to Supabase via connection pooling with Supavisor.
 Direct connection to the database. Used for migrations.
 `DIRECT_URL=[Postgres direct connection string]`
 
+Environment variables for different environments, determining which frontend base URL to use for links in the emails:
+`ENVIRONMENT=development` for local development, or `ENVIRONMENT=production` for production.
+`DEVELOPMENT_FRONTEND_BASE_URL=http://localhost:3000`
+`PRODUCTION_FRONTEND_BASE_URL=https://i-bet-ya-that.vercel.app`
+
 ### Running the reminder mailer service
 
 In order to start the reminder mailer service, you need to have a redis server running. You can start a local redis server using [Docker](https://docs.docker.com/engine/install/) with the following command:

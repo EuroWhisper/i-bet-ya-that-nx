@@ -5,6 +5,17 @@ import { sendReminderEmail } from '../email';
 import { ReminderEmailTemplate } from '@i-bet-ya-that-nx/email-templates';
 import { Prediction, VerificationStatus } from '@prisma/client';
 
+function getVerificationUrl(predictionId: string, verificationToken: string) {
+  const baseUrl =
+    process.env.ENVIRONMENT === 'development'
+      ? process.env.DEVELOPMENT_FRONTEND_BASE_URL
+      : process.env.PRODUCTION_FRONTEND_BASE_URL;
+
+  const verificationUrl = `${baseUrl}/predictions/${predictionId}/verification/${verificationToken}`;
+
+  return verificationUrl;
+}
+
 export async function processReminderJob(job: Job<Prediction>) {
   console.log('Processing job:', job.data);
 
@@ -12,7 +23,10 @@ export async function processReminderJob(job: Job<Prediction>) {
     ReminderEmailTemplate({
       prediction: job.data.prediction,
       predictionDate: job.data.reminderDate.toString(),
-      verificationUrl: '',
+      verificationUrl: getVerificationUrl(
+        job.data.id.toString(),
+        job.data.verificationToken
+      ),
     })
   );
 

@@ -1,4 +1,4 @@
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 
 type ServerAction<TArgs extends unknown[], TResult> = (
   ...args: TArgs
@@ -8,12 +8,21 @@ export const useServerAction = <TArgs extends unknown[], TResult>(
   action: ServerAction<TArgs, TResult>
 ) => {
   const [isPending, startTransition] = useTransition();
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const executeAction = (...args: TArgs) => {
-    startTransition(() => {
-      action(...args);
+    startTransition(async () => {
+      setIsError(false);
+      setIsSuccess(false);
+      try {
+        await action(...args);
+        setIsSuccess(true);
+      } catch {
+        setIsError(true);
+      }
     });
   };
 
-  return [executeAction, isPending] as const;
+  return { executeAction, isPending, isError, isSuccess };
 };
