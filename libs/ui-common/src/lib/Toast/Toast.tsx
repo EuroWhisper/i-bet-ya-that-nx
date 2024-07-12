@@ -55,4 +55,4 @@ Toast.displayName = 'Toast';
 
 type ToastType = 'success' | 'error' | 'warning' | 'info';
 
-export { Toast, ToastType };
+export { Toast, type ToastType };

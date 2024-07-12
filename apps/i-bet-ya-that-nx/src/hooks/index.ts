@@ -1,2 +1,2 @@
-export * from './serverActions';
 export * from './useNotification';
+export * from './useServerAction';
