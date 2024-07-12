@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google';
-import { ToastViewport } from '@i-bet-ya-that-nx/ui-common';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 
@@ -22,10 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={clsx(inter.className, 'bg-white dark:bg-gray-900')}>
-        <Providers>
-          <ToastViewport className="[--viewport-padding:_25px] fixed bottom-0 right-0 flex flex-col p-[var(--viewport-padding)] gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

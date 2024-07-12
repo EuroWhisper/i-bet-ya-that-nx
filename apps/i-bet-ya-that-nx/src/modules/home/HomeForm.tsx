@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { Button } from '@i-bet-ya-that-nx/ui-common';
-import { Toast } from '@i-bet-ya-that-nx/ui-common';
 
 import { createPrediction } from '../../app/actions';
 import { Form, useForm } from '../../components/form/Form';
 import { InputField } from '../../components/form/InputField';
-import { useServerAction } from '../../hooks';
+import { useNotification, useServerAction } from '../../hooks';
 
 import { HomeFormData } from './types';
 
@@ -24,7 +23,7 @@ const defaultValues: HomeFormData = {
 const HomeForm = ({ predictionSuggestion }: Props) => {
   const { executeAction, isPending } = useServerAction(createPrediction);
 
-  const [open, setOpen] = useState(false);
+  const notify = useNotification();
 
   const formMethods = useForm<HomeFormData>({
     defaultValues,
@@ -48,7 +47,10 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
           data.email
         );
         formMethods.reset(defaultValues);
-        setOpen(true);
+        notify({
+          description: 'Your prediction has been saved successfully',
+          type: 'success',
+        });
       }}
     >
       <InputField
@@ -86,9 +88,6 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
           </div>
         </div>
       )}
-      <Toast open={open} onOpenChange={setOpen}>
-        <h2>Saved successfully!</h2>
-      </Toast>
     </Form>
   );
 };

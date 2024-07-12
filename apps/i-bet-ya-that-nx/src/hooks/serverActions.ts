@@ -12,9 +12,10 @@ export const useServerAction = <TArgs extends unknown[], TResult>(
   const [isSuccess, setIsSuccess] = useState(false);
 
   const executeAction = (...args: TArgs) => {
+    setIsError(false);
+    setIsSuccess(false);
+
     startTransition(async () => {
-      setIsError(false);
-      setIsSuccess(false);
       try {
         await action(...args);
         setIsSuccess(true);

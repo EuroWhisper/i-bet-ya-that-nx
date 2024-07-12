@@ -1,7 +1,8 @@
 'use client';
 
-import * as RadixToast from '@radix-ui/react-toast';
 import { ThemeProvider } from 'next-themes';
+
+import { ToastProvider } from '../context/ToastContext';
 
 type Props = {
   children: React.ReactNode;
@@ -10,9 +11,7 @@ type Props = {
 const Providers = ({ children }: Props) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <RadixToast.Provider swipeDirection="right">
-        {children}
-      </RadixToast.Provider>
+      <ToastProvider>{children}</ToastProvider>
     </ThemeProvider>
   );
 };

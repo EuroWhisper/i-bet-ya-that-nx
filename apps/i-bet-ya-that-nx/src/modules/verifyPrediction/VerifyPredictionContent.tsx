@@ -1,27 +1,39 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Button, Card, Stack, Toast } from '@i-bet-ya-that-nx/ui-common';
+import { useEffect } from 'react';
+import { Button, Card, Stack } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
 
 import { verifyPrediction } from '../../app/actions';
-import { useServerAction } from '../../hooks';
+import { useNotification, useServerAction } from '../../hooks';
 
 type Props = {
   prediction: Prediction;
 };
 
 export const VerifyPredictionContent = ({ prediction }: Props) => {
-  const [open, setOpen] = useState(false);
+  const notify = useNotification();
 
-  const { executeAction, isPending, isSuccess } =
+  const { executeAction, isPending, isSuccess, isError } =
     useServerAction(verifyPrediction);
 
   useEffect(() => {
     if (isSuccess) {
-      setOpen(true);
+      notify({
+        description: 'Your prediction has been verified',
+        type: 'success',
+      });
     }
-  }, [isSuccess, setOpen]);
+  }, [isSuccess, notify]);
+
+  useEffect(() => {
+    if (isError) {
+      notify({
+        description: 'Your prediction has not been verified',
+        type: 'success',
+      });
+    }
+  }, [isError, notify]);
 
   return (
     <Stack
@@ -53,9 +65,6 @@ export const VerifyPredictionContent = ({ prediction }: Props) => {
           </Button>
         </Stack>
       </Card>
-      <Toast open={open} onOpenChange={setOpen}>
-        <h2>Verified successfully!</h2>
-      </Toast>
     </Stack>
   );
 };
