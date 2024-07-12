@@ -14,6 +14,7 @@
     "@prisma/client": "^5.9.1",
     "@radix-ui/react-toast": "^1.1.5",
     "@react-email/components": "0.0.21",
+    "@tabler/icons-react": "^3.10.0",
     "axios": "^1.6.0",
     "bottleneck": "^2.19.5",
     "bullmq": "^5.7.14",

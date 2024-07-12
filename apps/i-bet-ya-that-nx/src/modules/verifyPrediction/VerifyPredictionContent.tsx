@@ -20,7 +20,7 @@ export const VerifyPredictionContent = ({ prediction }: Props) => {
   useEffect(() => {
     if (isSuccess) {
       notify({
-        description: 'Your prediction has been verified',
+        description: 'Prediction verified successfully',
         type: 'success',
       });
     }
@@ -29,8 +29,8 @@ export const VerifyPredictionContent = ({ prediction }: Props) => {
   useEffect(() => {
     if (isError) {
       notify({
-        description: 'Your prediction has not been verified',
-        type: 'success',
+        description: 'This prediction has already been verified',
+        type: 'error',
       });
     }
   }, [isError, notify]);

@@ -1,5 +1,9 @@
 import { createContext, useCallback, useState } from 'react';
-import { Toast, ToastViewport } from '@i-bet-ya-that-nx/ui-common';
+import {
+  Toast,
+  type ToastType,
+  ToastViewport,
+} from '@i-bet-ya-that-nx/ui-common';
 import * as RadixToast from '@radix-ui/react-toast';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -35,7 +39,7 @@ export const ToastProvider = ({ children }: ToastProviderProps) => {
         <RadixToast.Provider swipeDirection="right">
           <ToastViewport className="[--viewport-padding:_25px] fixed bottom-0 right-0 flex flex-col p-[var(--viewport-padding)] gap-[10px] w-[390px] max-w-[100vw] m-0 list-none z-[2147483647] outline-none" />
           {toasts.map((toast) => (
-            <Toast key={toast.id} open>
+            <Toast key={toast.id} type={toast.type} open>
               {toast.description}
             </Toast>
           ))}
@@ -53,12 +57,12 @@ type QueuedToast = {
   id: string;
   title?: string;
   description: string;
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: ToastType;
 };
 
 type NotifyArgs = {
   title?: string;
   description: string;
-  type?: 'success' | 'error' | 'warning' | 'info';
+  type?: ToastType;
   duration?: number;
 };

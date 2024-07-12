@@ -47,6 +47,8 @@ Date formatting: [date-fns](https://date-fns.org/)
 
 Themeing: To prevent a flicker on hydration, we use the next-themes library to set the theme based on the user's system preference. [next-themes](https://github.com/pacocoursey/next-themes)
 
+Iconography: For icons, we use the Tabler Icons library. [Tabler Icons](https://www.npmjs.com/package/@tabler/icons-react)
+
 ## Reminder mailer
 
 The reminder mailer service is a service that checks the database for reminders that are due to be sent and sends them to the user's email address. The service uses [Redis](https://redis.io/) and [BullMQ](https://docs.bullmq.io/) to manage the queue of reminders to be sent, and [Mailersend](https://www.mailersend.com/) to send the reminder emails.
