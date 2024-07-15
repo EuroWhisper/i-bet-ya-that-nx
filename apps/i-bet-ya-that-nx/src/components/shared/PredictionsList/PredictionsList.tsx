@@ -1,6 +1,7 @@
 import { Prediction } from '@prisma/client';
-import { PredictionCard } from '../PredictionCard/PredictionCard';
+
 import { formatDate } from '../../../app/utils';
+import { PredictionCard } from '../PredictionCard/PredictionCard';
 type Props = {
   predictions: Prediction[];
 };
@@ -11,9 +12,9 @@ export const PredictionsList = ({ predictions }: Props) => {
       {predictions.map((prediction) => (
         <PredictionCard
           key={prediction.id}
+          date={formatDate(prediction.reminderDate)}
           email={prediction.email}
           prediction={prediction.prediction}
-          date={formatDate(prediction.reminderDate)}
         />
       ))}
     </div>

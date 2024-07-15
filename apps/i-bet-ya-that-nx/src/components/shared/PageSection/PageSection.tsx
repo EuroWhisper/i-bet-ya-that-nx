@@ -1,4 +1,4 @@
-import { Stack } from '../../../../../../libs/ui-common/src/lib/Stack/Stack';
+import { Stack, Text } from '@i-bet-ya-that-nx/ui-common';
 
 type Props = {
   as?: React.ElementType;
@@ -10,7 +10,9 @@ type Props = {
 export const PageSection = ({ as, children, className, title }: Props) => {
   return (
     <Stack as={as} gap={2}>
-      <h2 className="text-2xl mt-8">{title}</h2>
+      <Text className="mt-8" variant="h2">
+        {title}
+      </Text>
       {children}
     </Stack>
   );

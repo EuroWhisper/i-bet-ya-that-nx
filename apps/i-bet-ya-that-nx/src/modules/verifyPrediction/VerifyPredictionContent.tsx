@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Button, Card, Stack } from '@i-bet-ya-that-nx/ui-common';
+import { Button, Card, Stack, Text } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
 
 import { verifyPrediction } from '../../app/actions';
@@ -43,8 +43,8 @@ export const VerifyPredictionContent = ({ prediction }: Props) => {
     >
       <Card className="min-w-[32rem]">
         <Stack gap={2}>
-          <h1 className="text-xl">Was your prediction correct?</h1>
-          <p className="italic">{prediction.prediction}</p>
+          <Text variant="h3">Was your prediction correct?</Text>
+          <Text italic>{prediction.prediction}</Text>
         </Stack>
         <Stack className="mt-8" gap={4} horizontal>
           <Button

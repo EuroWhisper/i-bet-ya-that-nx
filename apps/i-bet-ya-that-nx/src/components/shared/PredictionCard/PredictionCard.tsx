@@ -1,5 +1,4 @@
-import { Stack } from '@i-bet-ya-that-nx/ui-common';
-import { Card } from '@i-bet-ya-that-nx/ui-common';
+import { Card, Stack, Text } from '@i-bet-ya-that-nx/ui-common';
 
 type Props = {
   email: string;
@@ -12,15 +11,20 @@ export const PredictionCard = ({ email, prediction, date }: Props) => {
     <Card>
       <Stack gap={3}>
         <Stack gap={1}>
-          <p className="text-sm text-gray-600 dark:text-gray-200 font-bold">
+          <Text
+            className="text-gray-600 dark:text-gray-200 font-bold"
+            variant="small"
+          >
             {email}
-          </p>
-          <h3 className="text-xs text-gray-400 dark:text-gray-50">{date}</h3>
+          </Text>
+          <Text className="text-gray-400 dark:text-gray-50" variant="xs">
+            {date}
+          </Text>
         </Stack>
         <div>
-          <p className="text-gray-600 dark:text-white  line-clamp-3">
+          <Text className="text-gray-600 dark:text-white  line-clamp-3">
             {prediction}
-          </p>
+          </Text>
         </div>
       </Stack>
     </Card>

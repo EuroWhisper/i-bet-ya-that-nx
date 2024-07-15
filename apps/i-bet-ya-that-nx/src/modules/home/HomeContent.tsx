@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Sheet } from '@i-bet-ya-that-nx/ui-common';
+import { Sheet, Text } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
 
 import { PageSection } from '../../components/shared/PageSection/PageSection';
@@ -23,9 +23,9 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
           width={320}
           priority
         />
-        <h1 className="font-fugaz text-3xl md:text-6xl text-white mt-4">
+        <Text className="font-fugaz md:text-6xl text-white mt-4" variant="h1">
           I bet ya that...
-        </h1>
+        </Text>
         <Sheet className="mt-8 w-full md:w-[40rem]">
           <HomeForm predictionSuggestion={predictionSuggestion} />
         </Sheet>
@@ -37,30 +37,30 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
           </PageSection>
         )}
         <PageSection title="What is this?">
-          <p>
+          <Text>
             This is an application where you can make predictions and track how
             often you are right or wrong. You can suggest a prediction and set a
             date when it should be verified. You will receive an email with a
             link to verify the prediction.
-          </p>
+          </Text>
         </PageSection>
         <PageSection title="What else will be added?">
-          <p>
+          <Text>
             Soon, a point system will be implemented to keep track of your score
             and a leaderboard will be added to see who is the best predictor.
-          </p>
-          <p>
+          </Text>
+          <Text>
             Additionally, AI will be used to check the outcome of the
             predictions where possible. Not all predictions can be verified by
             AI, so some will have to be manually verified.
-          </p>
-          <p>
+          </Text>
+          <Text>
             The plan right now is to lock the amount of points you get when you
             successfully predict something to a lower amount if you had to
             manually verify it. While more points will be awarded if the AI can
             verify it. This is to help stop people from spamming predictions for
             lots of points that cannot be verified.
-          </p>
+          </Text>
         </PageSection>
       </Sheet>
     </main>
