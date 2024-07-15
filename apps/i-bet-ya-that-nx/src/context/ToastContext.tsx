@@ -7,10 +7,9 @@ import {
 import * as RadixToast from '@radix-ui/react-toast';
 import { v4 as uuidv4 } from 'uuid';
 
-export const ToastContext = createContext<(args: NotifyArgs) => void>(() => {
-  // Default no-op function to avoid null checks
-  /* no-op */
-});
+export const ToastContext = createContext<((args: NotifyArgs) => void) | null>(
+  null
+);
 
 export const ToastProvider = ({ children }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<QueuedToast[]>([]);
