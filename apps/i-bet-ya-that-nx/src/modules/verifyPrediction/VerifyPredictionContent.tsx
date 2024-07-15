@@ -48,7 +48,7 @@ export const VerifyPredictionContent = ({ prediction }: Props) => {
         </Stack>
         <Stack className="mt-8" gap={4} horizontal>
           <Button
-            disabled={isPending}
+            isLoading={isPending}
             onClick={() => {
               executeAction(prediction.id, true);
             }}
@@ -56,7 +56,7 @@ export const VerifyPredictionContent = ({ prediction }: Props) => {
             Yes
           </Button>
           <Button
-            disabled={isPending}
+            isLoading={isPending}
             onClick={() => {
               executeAction(prediction.id, false);
             }}

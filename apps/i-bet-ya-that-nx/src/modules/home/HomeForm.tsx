@@ -82,7 +82,7 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
             </div>
           </div>
           <div className="mt-4">
-            <Button disabled={isPending} type="submit">
+            <Button isLoading={isPending} type="submit">
               Make prediction
             </Button>
           </div>
