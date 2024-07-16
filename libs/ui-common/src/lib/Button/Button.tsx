@@ -1,40 +1,55 @@
-import clsx from 'clsx';
-import { Spinner } from '../Spinner/Spinner';
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '../utils';
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  isLoading?: boolean;
-  size?: 'small' | 'medium' | 'large';
-};
-
-const getButtonSizeClass = (size: Props['size']) => {
-  switch (size) {
-    case 'small':
-      return 'h-8';
-    case 'medium':
-      return 'h-12';
-    case 'large':
-      return 'h-16';
-    default:
-      return 'h-12';
+const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline:
+          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
+      },
+      size: {
+        default: 'h-10 px-4 py-2',
+        sm: 'h-9 rounded-md px-3',
+        lg: 'h-11 rounded-md px-8',
+        icon: 'h-10 w-10',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
   }
-};
+);
 
-const Button = ({ children, size, isLoading, disabled, ...props }: Props) => {
-  const buttonSizeClass = getButtonSizeClass(size);
-  const isDisabled = disabled || isLoading;
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
 
-  return (
-    <button
-      className={clsx(
-        'w-full p-2 rounded-lg text-white',
-        buttonSizeClass,
-        isDisabled ? 'bg-gray-400' : 'bg-red-500'
-      )}
-      {...props}
-    >
-      {isLoading ? <Spinner /> : children}
-    </button>
-  );
-};
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = 'Button';
 
-export { Button };
+export { Button, buttonVariants };
