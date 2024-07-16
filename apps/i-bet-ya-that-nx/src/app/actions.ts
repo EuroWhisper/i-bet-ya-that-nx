@@ -3,11 +3,23 @@
 import { revalidateTag } from 'next/cache';
 import { PrismaClient, VerificationStatus } from '@prisma/client';
 
+import { predictionSchema } from '../modules/home/predictionSchema';
+
 export const createPrediction = async (
   prediction: string,
-  reminderDate: Date,
+  confirmationDate: Date,
   email: string
 ) => {
+  const validation = predictionSchema.safeParse({
+    prediction,
+    confirmationDate,
+    email,
+  });
+
+  if (!validation.success) {
+    return { message: 'Validation failed', errors: validation.error.errors };
+  }
+
   const prisma = new PrismaClient();
 
   try {
@@ -15,7 +27,7 @@ export const createPrediction = async (
       data: {
         prediction: prediction,
         email: email,
-        reminderDate: reminderDate,
+        reminderDate: confirmationDate,
       },
     });
     revalidateTag('predictions');
