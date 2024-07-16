@@ -20,7 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={clsx(inter.className, 'bg-white dark:bg-gray-900')}>
+      <body
+        className={clsx(
+          inter.className,
+          'min-h-screen bg-background antialiased'
+        )}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
