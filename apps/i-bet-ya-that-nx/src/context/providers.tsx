@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from 'next-themes';
 
-import { ToastProvider } from '../context/ToastContext';
+import { ToastProvider } from './ToastContext';
 
 type Props = {
   children: React.ReactNode;

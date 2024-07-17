@@ -2,9 +2,9 @@ import { Inter } from 'next/font/google';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 
-import { Providers } from './providers';
+import { Providers } from '../context/providers';
 
-import './globals.css';
+import '../styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link href="/favicon.ico" rel="icon" sizes="any" />
+      </head>
       <body
         className={clsx(
           inter.className,

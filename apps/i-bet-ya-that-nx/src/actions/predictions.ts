@@ -7,8 +7,7 @@ import {
   predictionSchema,
   verificationSchema,
 } from '../modules/home/predictionSchema';
-
-import { actionClient, CustomError } from './utils';
+import { actionClient, CustomError } from '../utils/action-client';
 
 export const createPrediction = actionClient
   .schema(predictionSchema)

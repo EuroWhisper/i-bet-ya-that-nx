@@ -1,12 +1,7 @@
-import { format } from 'date-fns';
 import {
   createSafeActionClient,
   DEFAULT_SERVER_ERROR_MESSAGE,
 } from 'next-safe-action';
-
-export const formatDate = (date: Date) => {
-  return format(date, 'MM/dd/yyyy');
-};
 
 export class CustomError extends Error {
   constructor(message: string, name: string, stack?: string) {

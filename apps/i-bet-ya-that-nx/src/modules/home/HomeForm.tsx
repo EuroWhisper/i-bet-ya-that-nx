@@ -22,7 +22,7 @@ import { CalendarIcon } from 'lucide-react';
 import { useAction } from 'next-safe-action/hooks';
 import { useForm } from 'react-hook-form';
 
-import { createPrediction } from '../../app/actions';
+import { createPrediction } from '../../actions/predictions';
 import { useNotification } from '../../hooks';
 
 import { predictionSchema } from './predictionSchema';

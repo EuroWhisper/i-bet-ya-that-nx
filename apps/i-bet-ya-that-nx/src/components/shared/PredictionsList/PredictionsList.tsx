@@ -1,6 +1,6 @@
 import { Prediction } from '@prisma/client';
 
-import { formatDate } from '../../../app/utils';
+import { formatDate } from '../../../utils';
 import { PredictionCard } from '../PredictionCard/PredictionCard';
 type Props = {
   predictions: Prediction[];

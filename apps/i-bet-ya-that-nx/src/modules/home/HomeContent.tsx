@@ -4,7 +4,7 @@ import { Prediction } from '@prisma/client';
 
 import { PageSection } from '../../components/shared/PageSection/PageSection';
 import { PredictionsList } from '../../components/shared/PredictionsList/PredictionsList';
-import { ThemeToggle } from '../../components/ThemeToggle/ThemeToggle';
+import { ThemeToggle } from '../../components/shared/ThemeToggle/ThemeToggle';
 
 import { HomeForm } from './HomeForm';
 

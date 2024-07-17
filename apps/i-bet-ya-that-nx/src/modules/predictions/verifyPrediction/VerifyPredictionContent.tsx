@@ -4,8 +4,8 @@ import { Button, Card, Stack, Text } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
 import { useAction } from 'next-safe-action/hooks';
 
-import { verifyPrediction } from '../../app/actions';
-import { useNotification } from '../../hooks';
+import { verifyPrediction } from '../../../actions';
+import { useNotification } from '../../../hooks';
 
 type Props = {
   prediction: Prediction;

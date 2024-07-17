@@ -1,7 +1,7 @@
 import { unstable_cache as cache } from 'next/cache';
 import { PrismaClient } from '@prisma/client';
 
-import { VerifyPredictionContent } from '../../../../../modules/verifyPrediction/VerifyPredictionContent';
+import { VerifyPredictionContent } from '../../../../../modules/predictions/';
 
 type Params = {
   predictionId: string;
