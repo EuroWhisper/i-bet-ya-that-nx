@@ -1,7 +1,12 @@
+import { type Metadata } from 'next';
 import { unstable_cache as cache } from 'next/cache';
 import { PrismaClient } from '@prisma/client';
 
 import { VerifyPredictionContent } from '../../../../../modules/predictions/';
+
+export const metadata: Metadata = {
+  title: 'I Bet Ya That - Verify Prediction',
+};
 
 type Params = {
   predictionId: string;

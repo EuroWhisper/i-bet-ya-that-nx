@@ -1,3 +1,4 @@
+import { type Metadata } from 'next';
 import { unstable_cache as cache } from 'next/cache';
 import { getPredictionSuggestion } from '@i-bet-ya-that-nx/chatgpt';
 import { PrismaClient } from '@prisma/client';
@@ -5,6 +6,10 @@ import { PrismaClient } from '@prisma/client';
 import { HomeContent } from '../modules/home/HomeContent';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'I Bet Ya That - Home',
+};
 
 const getData = async () => {
   try {
