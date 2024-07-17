@@ -9,7 +9,9 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": { "@next/next/no-html-link-for-pages": "off" }
+      "rules": {
+        "@next/next/no-html-link-for-pages": "off"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],
@@ -32,13 +34,13 @@
       "error",
       {
         "groups": [
-          ["^\\u0000"], // Side effect imports
-          ["^(react|react-dom)(/.*|$)", "^(next)(/.*|$)", "^@?\\w"], // Packages
-          ["^(src)(/.*|$)"], // Internal packages
-          ["^"], // Absolute imports and other imports
-          ["^\\.\\.(?!/?$)", "^\\.\\./?$"], // Parent imports
-          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"], // Relative imports
-          ["^.+\\.s?css$"] // Style imports
+          ["^\\u0000"],
+          ["^(react|react-dom)(/.*|$)", "^(next)(/.*|$)", "^@?\\w"],
+          ["^(src)(/.*|$)"],
+          ["^"],
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          ["^.+\\.s?css$"]
         ]
       }
     ],

@@ -1,8 +1,0 @@
-{
-  "name": "i-bet-ya-that-nx",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/i-bet-ya-that-nx",
-  "projectType": "application",
-  "targets": {},
-  "tags": []
-}

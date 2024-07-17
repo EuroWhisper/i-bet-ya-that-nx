@@ -16,10 +16,7 @@
         "name": "next"
       }
     ],
-    "types": [
-      "jest",
-      "node"
-    ]
+    "types": ["jest", "node"]
   },
   "include": [
     "**/*.ts",
@@ -30,12 +27,9 @@
     "../../dist/apps/i-bet-ya-that-nx/.next/types/**/*.ts",
     "next-env.d.ts",
     "../../libs/chatgpt/src/lib/rate-limiter.ts",
-    ".next/types/**/*.ts"
-, "../../libs/ui-common/src/lib/Toast/Toast.tsx", "../../libs/ui-common/src/lib/Toast/ToastViewport.tsx"  ],
-  "exclude": [
-    "node_modules",
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+    ".next/types/**/*.ts",
+    "../../libs/ui-common/src/lib/Toast/Toast.tsx",
+    "../../libs/ui-common/src/lib/Toast/ToastViewport.tsx"
+  ],
+  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

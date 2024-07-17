@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'i-bet-ya-that-nx',
+  displayName: 'prediction-frontend',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/apps/i-bet-ya-that-nx',
+  coverageDirectory: '../../coverage/apps/prediction-frontend',
 };
