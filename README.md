@@ -12,13 +12,13 @@ Then, from the root directory of the repository, run the classic:
 
 After that, follow the instructions below to get whichever service you need to work on running locally.
 
-## i-bet-ya-that-nx
+## prediction-frontend
 
 This is the main application for the i-bet-ya-that project. It is a [Next.js](https://nextjs.org/) application that provides the frontend for the project, as well as the API for the project.
 
 ### Environment variables
 
-The i-bet-ya-that-nx service requires the following environment variables to be set in order to run (place in ./apps/i-bet-ya-that/.env):
+The prediction-frontend service requires the following environment variables to be set in order to run (place in ./apps/prediction-frontend/.env):
 
 OpenAI API key:
 `OPENAI_API_KEY=[API key]`
@@ -29,10 +29,10 @@ Connect to Supabase via connection pooling with Supavisor.
 Direct connection to the database. Used for migrations.
 `DIRECT_URL=[Postgres direct connection string]`
 
-### Running the i-bet-ya-that-nx service
+### Running the prediction-frontend service
 
-The i-bet-ya-that-nx service can be started by running the following command:
-`nx run i-bet-ya-that-nx:dev`
+The prediction-frontend service can be started by running the following command:
+`nx run prediction-frontend:dev`
 
 Then, the frontend can be accessed at:
 `http://localhost:3000`
