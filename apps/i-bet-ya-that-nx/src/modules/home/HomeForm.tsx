@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
   Calendar,
+  Card,
   cn,
   Form,
   FormControl,
@@ -19,10 +19,11 @@ import {
 } from '@i-bet-ya-that-nx/ui-common';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
+import { useAction } from 'next-safe-action/hooks';
 import { useForm } from 'react-hook-form';
 
 import { createPrediction } from '../../app/actions';
-import { useNotification, useServerAction } from '../../hooks';
+import { useNotification } from '../../hooks';
 
 import { predictionSchema } from './predictionSchema';
 import { HomeFormData } from './types';
@@ -38,7 +39,24 @@ const defaultValues: HomeFormData = {
 };
 
 const HomeForm = ({ predictionSuggestion }: Props) => {
-  const { executeAction, isPending } = useServerAction(createPrediction);
+  const { execute: executeCreatePrediction, isExecuting } = useAction(
+    createPrediction,
+    {
+      onSuccess: () => {
+        formMethods.reset(defaultValues);
+        notify({
+          description: 'Your prediction has been saved successfully',
+          type: 'success',
+        });
+      },
+      onError: () => {
+        notify({
+          description: 'An error occurred while saving your prediction',
+          type: 'error',
+        });
+      },
+    }
+  );
 
   const notify = useNotification();
 
@@ -47,36 +65,24 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
     defaultValues,
   });
 
-  const [shouldShowFullForm, setShouldShowFullForm] = useState(false);
-
-  useEffect(() => {
-    if (formMethods.formState.isDirty) {
-      setShouldShowFullForm(true);
-    }
-  }, [formMethods.formState.isDirty, setShouldShowFullForm]);
+  const handleSavePrediction = (data: HomeFormData) => {
+    executeCreatePrediction({
+      prediction: data.prediction,
+      confirmationDate: data.confirmationDate,
+      email: data.email,
+    });
+  };
 
   return (
     <Form {...formMethods}>
-      <form
-        onSubmit={formMethods.handleSubmit(async (data) => {
-          await executeAction(
-            data.prediction,
-            new Date(data.confirmationDate),
-            data.email
-          );
-          formMethods.reset(defaultValues);
-          notify({
-            description: 'Your prediction has been saved successfully',
-            type: 'success',
-          });
-        })}
-      >
-        <InputField
-          name="prediction"
-          placeholder={predictionSuggestion}
-          type="text"
-        />
-        {shouldShowFullForm && (
+      <form onSubmit={formMethods.handleSubmit(handleSavePrediction)}>
+        <Card>
+          <InputField
+            label="Prediction"
+            name="prediction"
+            placeholder={predictionSuggestion}
+            type="text"
+          />
           <div>
             <div className="mt-3 flex justify-between items-end gap-4">
               <div className="w-full">
@@ -107,9 +113,7 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
                         </PopoverTrigger>
                         <PopoverContent align="start" className="w-auto p-0">
                           <Calendar
-                            disabled={(date) =>
-                              date > new Date() || date < new Date('1900-01-01')
-                            }
+                            disabled={(date) => date < new Date('1900-01-01')}
                             mode="single"
                             selected={field.value as unknown as Date}
                             initialFocus
@@ -129,13 +133,14 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
             <div className="mt-4">
               <Button
                 className="bg-red-600 hover:bg-red-300 text-white w-full"
+                isLoading={isExecuting}
                 type="submit"
               >
                 Make prediction
               </Button>
             </div>
           </div>
-        )}
+        </Card>
       </form>
     </Form>
   );

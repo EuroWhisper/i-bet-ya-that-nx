@@ -6,6 +6,7 @@ import {
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '../Form/Form';
 import { Input } from './Input';
@@ -13,6 +14,7 @@ import { Input } from './Input';
 type Props = {
   className?: string;
   name: string;
+  label?: string;
   placeholder?: string;
   helperText?: string;
   type?: React.HTMLInputTypeAttribute;
@@ -21,6 +23,7 @@ type Props = {
 export const InputField = ({
   className,
   name,
+  label,
   placeholder,
   helperText,
   type,
@@ -33,6 +36,7 @@ export const InputField = ({
       name={name}
       render={({ field }) => (
         <FormItem>
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Input
               className={className}

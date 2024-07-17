@@ -5,24 +5,13 @@ import { PrismaClient, VerificationStatus } from '@prisma/client';
 
 import { predictionSchema } from '../modules/home/predictionSchema';
 
-export const createPrediction = async (
-  prediction: string,
-  confirmationDate: Date,
-  email: string
-) => {
-  const validation = predictionSchema.safeParse({
-    prediction,
-    confirmationDate,
-    email,
-  });
+import { actionClient } from './utils';
 
-  if (!validation.success) {
-    return { message: 'Validation failed', errors: validation.error.errors };
-  }
+export const createPrediction = actionClient
+  .schema(predictionSchema)
+  .action(async ({ parsedInput: { prediction, confirmationDate, email } }) => {
+    const prisma = new PrismaClient();
 
-  const prisma = new PrismaClient();
-
-  try {
     await prisma.prediction.create({
       data: {
         prediction: prediction,
@@ -31,13 +20,9 @@ export const createPrediction = async (
       },
     });
     revalidateTag('predictions');
-    return { message: 'Prediction created' };
-  } catch {
-    return { message: 'Internal server error' };
-  } finally {
+
     prisma.$disconnect();
-  }
-};
+  });
 
 export const verifyPrediction = async (id: number, isCorrect: boolean) => {
   const prisma = new PrismaClient();

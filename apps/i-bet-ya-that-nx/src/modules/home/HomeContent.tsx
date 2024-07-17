@@ -16,7 +16,7 @@ type Props = {
 const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
   return (
     <main>
-      <div className="flex min-h-screen flex-col items-center md:justify-center bg-gradient-to-br	from-[#FF4B12] to-[#4200FF]">
+      <div className="flex min-h-screen flex-col items-center md:justify-center bg-gradient-to-br	from-[#FF4B12] to-[#4200FF] dark:from-gray-700 dark:to-gray-900">
         <Image
           alt="Gambling doberman"
           height={320}
