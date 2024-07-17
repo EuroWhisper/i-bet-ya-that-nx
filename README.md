@@ -45,6 +45,8 @@ Form control: [React Hook Form](https://react-hook-form.com/)
 
 Date formatting: [date-fns](https://date-fns.org/)
 
+Mutations: For calling server actions and tracking pending/success/error state we use [next-safe-action](https://next-safe-action.dev/), however we currently use the experimental branch as it provides type safety for the action arguments.
+
 Themeing: To prevent a flicker on hydration, we use the next-themes library to set the theme based on the user's system preference. [next-themes](https://github.com/pacocoursey/next-themes)
 
 Iconography: For icons, we use the Tabler Icons library. [Tabler Icons](https://www.npmjs.com/package/@tabler/icons-react)
