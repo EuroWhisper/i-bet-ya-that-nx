@@ -3,9 +3,12 @@
 import { revalidateTag } from 'next/cache';
 import { PrismaClient, VerificationStatus } from '@prisma/client';
 
-import { predictionSchema } from '../modules/home/predictionSchema';
+import {
+  predictionSchema,
+  verificationSchema,
+} from '../modules/home/predictionSchema';
 
-import { actionClient } from './utils';
+import { actionClient, CustomError } from './utils';
 
 export const createPrediction = actionClient
   .schema(predictionSchema)
@@ -24,35 +27,40 @@ export const createPrediction = actionClient
     prisma.$disconnect();
   });
 
-export const verifyPrediction = async (id: number, isCorrect: boolean) => {
-  const prisma = new PrismaClient();
+export const verifyPrediction = actionClient
+  .schema(verificationSchema)
+  .action(async ({ parsedInput: { id, isCorrect } }) => {
+    const prisma = new PrismaClient();
 
-  const verificationStatus = isCorrect
-    ? VerificationStatus.VERIFIED_CORRECT
-    : VerificationStatus.VERIFIED_INCORRECT;
+    const verificationStatus = isCorrect
+      ? VerificationStatus.VERIFIED_CORRECT
+      : VerificationStatus.VERIFIED_INCORRECT;
 
-  const targetPrediction = await prisma.prediction.findUnique({
-    where: { id: id },
+    const targetPrediction = await prisma.prediction.findUnique({
+      where: { id: id },
+    });
+
+    if (!targetPrediction) {
+      throw new CustomError('Prediction not found', 'PREDICTION_NOT_FOUND');
+    }
+
+    if (
+      targetPrediction?.verificationStatus === 'VERIFIED_CORRECT' ||
+      targetPrediction?.verificationStatus === 'VERIFIED_INCORRECT'
+    ) {
+      throw new CustomError(
+        'Prediction already verified',
+        'PREDICTION_ALREADY_VERIFIED'
+      );
+    }
+
+    await prisma.prediction.update({
+      where: { id: id },
+      data: {
+        verificationStatus,
+      },
+    });
+    revalidateTag('predictions');
+    prisma.$disconnect();
+    return { success: 'Prediction verified' };
   });
-
-  if (!targetPrediction) {
-    throw new Error('PREDICTION_NOT_FOUND');
-  }
-
-  if (
-    targetPrediction?.verificationStatus === 'VERIFIED_CORRECT' ||
-    targetPrediction?.verificationStatus === 'VERIFIED_INCORRECT'
-  ) {
-    throw new Error('PREDICTION_ALREADY_VERIFIED');
-  }
-
-  await prisma.prediction.update({
-    where: { id: id },
-    data: {
-      verificationStatus,
-    },
-  });
-  revalidateTag('predictions');
-  prisma.$disconnect();
-  return { message: 'Prediction verified' };
-};

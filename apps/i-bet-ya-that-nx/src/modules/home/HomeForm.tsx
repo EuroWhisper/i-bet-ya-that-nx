@@ -68,7 +68,7 @@ const HomeForm = ({ predictionSuggestion }: Props) => {
   const handleSavePrediction = (data: HomeFormData) => {
     executeCreatePrediction({
       prediction: data.prediction,
-      confirmationDate: data.confirmationDate,
+      confirmationDate: new Date(data.confirmationDate),
       email: data.email,
     });
   };

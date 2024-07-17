@@ -5,3 +5,8 @@ export const predictionSchema = z.object({
   confirmationDate: z.date(),
   email: z.string().email(),
 });
+
+export const verificationSchema = z.object({
+  id: z.number(),
+  isCorrect: z.boolean(),
+});

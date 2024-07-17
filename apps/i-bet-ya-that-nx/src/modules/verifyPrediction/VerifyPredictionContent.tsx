@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Button, Card, Stack, Text } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
+import { useAction } from 'next-safe-action/hooks';
 
 import { verifyPrediction } from '../../app/actions';
-import { useNotification, useServerAction } from '../../hooks';
+import { useNotification } from '../../hooks';
 
 type Props = {
   prediction: Prediction;
@@ -14,26 +14,24 @@ type Props = {
 export const VerifyPredictionContent = ({ prediction }: Props) => {
   const notify = useNotification();
 
-  const { executeAction, isPending, isSuccess, isError } =
-    useServerAction(verifyPrediction);
-
-  useEffect(() => {
-    if (isSuccess) {
-      notify({
-        description: 'Prediction verified successfully',
-        type: 'success',
-      });
+  const { execute: executeVerifyPrediction, isExecuting } = useAction(
+    verifyPrediction,
+    {
+      onSuccess: () => {
+        notify({
+          description: 'Your prediction has been verified successfully',
+          type: 'success',
+        });
+      },
+      onError: (e) => {
+        console.log(e);
+        notify({
+          description: `An error occurred while verifying your prediction: ${e.error.serverError}`,
+          type: 'error',
+        });
+      },
     }
-  }, [isSuccess, notify]);
-
-  useEffect(() => {
-    if (isError) {
-      notify({
-        description: 'This prediction has already been verified',
-        type: 'error',
-      });
-    }
-  }, [isError, notify]);
+  );
 
   return (
     <Stack
@@ -48,17 +46,17 @@ export const VerifyPredictionContent = ({ prediction }: Props) => {
         </Stack>
         <Stack className="mt-8" gap={4} horizontal>
           <Button
-            // isLoading={isPending}
+            isLoading={isExecuting}
             onClick={() => {
-              executeAction(prediction.id, true);
+              executeVerifyPrediction({ id: prediction.id, isCorrect: true });
             }}
           >
             Yes
           </Button>
           <Button
-            // isLoading={isPending}
+            isLoading={isExecuting}
             onClick={() => {
-              executeAction(prediction.id, false);
+              executeVerifyPrediction({ id: prediction.id, isCorrect: false });
             }}
           >
             No
