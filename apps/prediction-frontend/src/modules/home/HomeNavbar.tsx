@@ -1,8 +1,6 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-
-import { signInGoogle, signOutAll } from '../../actions/auth';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export const HomeNavbar = () => {
   const session = useSession();
@@ -24,13 +22,9 @@ export const HomeNavbar = () => {
           <span className="navbar-toggler-icon" />
         </button>
         {session.data ? (
-          <form action={signOutAll}>
-            <button type="submit">Sign out</button>
-          </form>
+          <button onClick={() => signOut()}>Sign out</button>
         ) : (
-          <form action={signInGoogle}>
-            <button type="submit">Sign in with Google</button>
-          </form>
+          <button onClick={() => signIn('google')}>Sign in with Google</button>
         )}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
