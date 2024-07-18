@@ -1,9 +1,8 @@
 import OpenAI from 'openai';
-import { limiter } from './rate-limiter';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const getPredictionSuggestion = limiter.wrap(async () => {
+const getPredictionSuggestion = async () => {
   try {
     const completion = await openai.chat.completions.create({
       messages: [
@@ -20,6 +19,6 @@ const getPredictionSuggestion = limiter.wrap(async () => {
   } catch (error) {
     throw new Error('Error in getPredictionSuggestion');
   }
-});
+};
 
 export { getPredictionSuggestion };
