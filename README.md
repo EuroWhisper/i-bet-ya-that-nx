@@ -23,6 +23,13 @@ The prediction-frontend service requires the following environment variables to 
 OpenAI API key:
 `OPENAI_API_KEY=[API key]`
 
+NextAuth.js secret:
+`AUTH_SECRET=[Secret]`
+
+Google OAuth client
+`AUTH_GOOGLE_ID=[OAuth ID]`
+`AUTH_GOOGLE_SECRET=[OAuth secret]`
+
 Connect to Supabase via connection pooling with Supavisor.
 `DATABASE_URL=[Postgres connection string]`
 
@@ -38,6 +45,8 @@ Then, the frontend can be accessed at:
 `http://localhost:3000`
 
 ### Libraries
+
+Authentication: [NextAuth.js](https://next-auth.js.org/)
 
 UI components: [Radix Primitive](https://radix-ui.com/primitive/docs/getting-started/introduction)
 
