@@ -1,8 +1,8 @@
-import { Card, Sheet, Stack, Text } from '@i-bet-ya-that-nx/ui-common';
+import { Card, LayoutSheet, Stack, Text } from '@i-bet-ya-that-nx/ui-common';
 
 const NotFound = () => {
   return (
-    <Sheet>
+    <LayoutSheet>
       <Stack
         className="h-screen"
         horizontalAlign="center"
@@ -17,7 +17,7 @@ const NotFound = () => {
           </Stack>
         </Card>
       </Stack>
-    </Sheet>
+    </LayoutSheet>
   );
 };
 

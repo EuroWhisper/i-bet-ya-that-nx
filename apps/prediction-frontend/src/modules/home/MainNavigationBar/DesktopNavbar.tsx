@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import {
   Button,
+  LayoutSheet,
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -10,7 +11,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-  Sheet,
   Stack,
   Text,
 } from '@i-bet-ya-that-nx/ui-common';
@@ -28,7 +28,7 @@ export const DesktopNavbar = () => {
   const isSignedIn = !!session.data;
 
   return (
-    <Sheet className="hidden md:block w-full">
+    <LayoutSheet className="hidden md:block w-full">
       <div className="w-full flex flex-row justify-between">
         <NavigationMenu displayFrom="right">
           <NavigationMenuList>
@@ -99,6 +99,6 @@ export const DesktopNavbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-    </Sheet>
+    </LayoutSheet>
   );
 };

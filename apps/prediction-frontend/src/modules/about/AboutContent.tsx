@@ -2,12 +2,12 @@
 
 import { SessionProvider } from 'next-auth/react';
 
-import { HomeNavbar } from '../home/HomeNavbar/HomeNavbar';
+import { MainNavigationBar } from '../home/MainNavigationBar/MainNavigationBar';
 
 export const AboutContent = () => {
   return (
     <SessionProvider>
-      <HomeNavbar />
+      <MainNavigationBar />
     </SessionProvider>
   );
 };

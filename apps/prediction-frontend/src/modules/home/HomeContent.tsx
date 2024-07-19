@@ -1,4 +1,4 @@
-import { Sheet, Text } from '@i-bet-ya-that-nx/ui-common';
+import { LayoutSheet, Text } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
 
 import { PageSection } from '../../components/shared/PageSection/PageSection';
@@ -16,7 +16,7 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
   return (
     <main>
       <HomeHeader predictionSuggestion={predictionSuggestion} />
-      <Sheet>
+      <LayoutSheet>
         <ThemeToggle />
         {existingPredictions && (
           <PageSection title="Latest predictions">
@@ -49,7 +49,7 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
             lots of points that cannot be verified.
           </Text>
         </PageSection>
-      </Sheet>
+      </LayoutSheet>
     </main>
   );
 };
