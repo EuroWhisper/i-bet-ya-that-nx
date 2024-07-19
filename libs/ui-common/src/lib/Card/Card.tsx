@@ -11,7 +11,7 @@ export const Card = ({ as, className, children }: Props) => {
   return (
     <Comp
       className={clsx(
-        'p-4 rounded-md border dark:border-none bg-white dark:bg-gray-600 shadow-lg dark:shadow-none',
+        'p-4 rounded-md border dark:border-none bg-white dark:bg-gray-600 shadow-md dark:shadow-none',
         className
       )}
     >
