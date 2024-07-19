@@ -19,6 +19,7 @@ import { LogOutIcon } from 'lucide-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { GoogleIcon } from '../../../components/custom-icons/GoogleIcon/GoogleIcon';
+import { ThemeToggle } from '../../../components/shared/ThemeToggle/ThemeToggle';
 
 const homeNavbarItemStyles =
   'bg-transparent hover:bg-transparent  text-white hover:text-gray-200';
@@ -96,6 +97,9 @@ export const DesktopNavbar = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
             )}
+            <NavigationMenuItem>
+              <ThemeToggle />
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
