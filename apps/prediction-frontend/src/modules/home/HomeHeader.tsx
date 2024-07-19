@@ -5,7 +5,7 @@ import { Sheet, Text } from '@i-bet-ya-that-nx/ui-common';
 import { SessionProvider } from 'next-auth/react';
 
 import { HomeForm } from './HomeForm';
-import { HomeNavbar } from './HomeNavbar';
+import { HomeNavbar } from './HomeNavbar/HomeNavbar';
 
 type Props = {
   predictionSuggestion: string;

@@ -2,7 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react';
 
-import { HomeNavbar } from '../home/HomeNavbar';
+import { HomeNavbar } from '../home/HomeNavbar/HomeNavbar';
 
 export const AboutContent = () => {
   return (

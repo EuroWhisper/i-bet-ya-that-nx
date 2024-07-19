@@ -18,15 +18,18 @@ import clsx from 'clsx';
 import { LogOutIcon } from 'lucide-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-import { GoogleIcon } from '../../components/custom-icons/GoogleIcon/GoogleIcon';
+import { GoogleIcon } from '../../../components/custom-icons/GoogleIcon/GoogleIcon';
 
-export const HomeNavbar = () => {
+const homeNavbarItemStyles =
+  'bg-transparent hover:bg-transparent  text-white hover:text-gray-200';
+
+export const DesktopNavbar = () => {
   const session = useSession();
   const isSignedIn = !!session.data;
 
   return (
-    <section className="p-2 flex justify-end bg-white bg-opacity-10">
-      <Sheet>
+    <Sheet className="hidden md:block w-full">
+      <div className="w-full flex flex-row justify-between">
         <NavigationMenu displayFrom="right">
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -34,7 +37,7 @@ export const HomeNavbar = () => {
                 <NavigationMenuLink
                   className={clsx(
                     navigationMenuTriggerStyle(),
-                    'bg-transparent  text-white'
+                    homeNavbarItemStyles
                   )}
                 >
                   Home
@@ -46,13 +49,17 @@ export const HomeNavbar = () => {
                 <NavigationMenuLink
                   className={clsx(
                     navigationMenuTriggerStyle(),
-                    'bg-transparent  text-white'
+                    homeNavbarItemStyles
                   )}
                 >
                   About
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        <NavigationMenu displayFrom="right">
+          <NavigationMenuList>
             {isSignedIn ? (
               <NavigationMenuItem>
                 <NavigationMenuLink
@@ -91,7 +98,7 @@ export const HomeNavbar = () => {
             )}
           </NavigationMenuList>
         </NavigationMenu>
-      </Sheet>
-    </section>
+      </div>
+    </Sheet>
   );
 };
