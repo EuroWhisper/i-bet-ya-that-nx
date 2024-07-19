@@ -5,6 +5,7 @@ export * from './lib/Form/Form';
 export * from './lib/Input/Input';
 export * from './lib/Input/InputField';
 export * from './lib/Label/Label';
+export * from './lib/NavigationMenu/NavigationMenu';
 export * from './lib/Popover/Popover';
 export * from './lib/Sheet/Sheet';
 export * from './lib/Stack/Stack';

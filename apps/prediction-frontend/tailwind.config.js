@@ -22,7 +22,7 @@ module.exports = {
     extend: {
       fontFamily: {
         fugaz: ['FugazOne', 'roboto', 'sans-serif'],
-        sans: ['var(--font-sans)', ...fontFamily.sans],
+        sans: [...fontFamily.sans],
       },
       colors: {
         border: 'hsl(var(--border))',
