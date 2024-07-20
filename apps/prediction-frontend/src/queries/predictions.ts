@@ -8,6 +8,7 @@ export const getPredictionsByEmail = cache(
     try {
       const predictions = await prisma.prediction.findMany({
         where: { email: userEmail },
+        orderBy: { createdAt: 'desc' },
       });
 
       return predictions;
