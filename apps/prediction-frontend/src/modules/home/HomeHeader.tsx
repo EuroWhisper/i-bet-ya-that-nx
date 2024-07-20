@@ -16,10 +16,10 @@ export const HomeHeader = ({ predictionSuggestion }: Props) => {
     <SessionProvider>
       <section className="h-screen bg-gradient-to-br	from-[#FF4B12] to-[#4200FF] dark:from-gray-700 dark:to-gray-900">
         <MainNavigationBar />
-        <div className="h-full flex flex-col items-center md:justify-center ">
+        <div className="h-[calc(100%-3.5rem)] flex flex-col items-center md:justify-center ">
           <Image
             alt="Gambling doberman"
-            className="size-48 md:size-80"
+            className="size-48 md:size-60 2xl:size-80"
             height={320}
             src="/mascot.svg"
             width={320}
