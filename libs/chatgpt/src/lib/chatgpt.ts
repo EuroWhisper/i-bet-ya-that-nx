@@ -12,7 +12,7 @@ const getPredictionSuggestion = async () => {
             'Come up with a creative, one sentence long prediction for something that could happen in the future (avoid the space travel topic and sensitive topics like health issues). This will be used as placeholder text in an HTML input element, so no extra fluff in your reply. E.G: "New Zealand will win the next rugby world cup',
         },
       ],
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o-mini',
       max_tokens: 32,
     });
     return completion.choices[0].message;
