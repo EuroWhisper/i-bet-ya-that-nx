@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 
+import { Footer } from '../components/shared/Footer/Footer';
 import { Providers } from '../context/providers';
 
 import '../styles/globals.css';
@@ -29,7 +30,10 @@ export default function RootLayout({
           'min-h-screen bg-background antialiased'
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -15,7 +15,7 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
   return (
     <main>
       <HomeHeader predictionSuggestion={predictionSuggestion} />
-      <LayoutSheet>
+      <LayoutSheet className="mb-8">
         {existingPredictions && (
           <PageSection title="Latest predictions">
             <PredictionsList predictions={existingPredictions} />
