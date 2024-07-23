@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { LayoutSheet, Text } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
 import { SessionProvider } from 'next-auth/react';
@@ -28,11 +28,14 @@ export const PredictionsOverviewContent = ({ predictions }: Props) => {
   const [predictionDeletionTargetId, setPredictionDeletionTargetId] =
     useState<number>();
 
-  const handleDeletePrediction = async (id: number) => {
-    setPredictionDeletionTargetId(id);
-    await executeAsync({ id });
-    setPredictionDeletionTargetId(undefined);
-  };
+  const handleDeletePrediction = useCallback(
+    async (id: number) => {
+      setPredictionDeletionTargetId(id);
+      await executeAsync({ id });
+      setPredictionDeletionTargetId(undefined);
+    },
+    [executeAsync]
+  );
 
   return (
     <div>
