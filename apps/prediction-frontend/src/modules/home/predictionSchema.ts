@@ -10,3 +10,7 @@ export const verificationSchema = z.object({
   id: z.number(),
   isCorrect: z.boolean(),
 });
+
+export const deletePredictionSchema = z.object({
+  id: z.number(),
+});

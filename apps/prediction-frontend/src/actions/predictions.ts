@@ -4,9 +4,11 @@ import { revalidateTag } from 'next/cache';
 import { PrismaClient, VerificationStatus } from '@prisma/client';
 
 import {
+  deletePredictionSchema,
   predictionSchema,
   verificationSchema,
 } from '../modules/home/predictionSchema';
+import { auth } from '../utils';
 import { actionClient, CustomError } from '../utils/action-client';
 
 export const createPrediction = actionClient
@@ -24,6 +26,30 @@ export const createPrediction = actionClient
     revalidateTag('predictions');
 
     prisma.$disconnect();
+  });
+
+export const deletePrediction = actionClient
+  .schema(deletePredictionSchema)
+  .action(async ({ parsedInput: { id } }) => {
+    const session = await auth();
+
+    if (!session?.user?.email) {
+      throw new CustomError('User is not signed in', 'UNAUTHENTICATED');
+    }
+
+    const prisma = new PrismaClient();
+
+    try {
+      await prisma.prediction.delete({
+        where: { id: id, email: session.user.email },
+      });
+      revalidateTag('predictions');
+      return { success: 'Prediction deleted successfully' };
+    } catch (error) {
+      throw new CustomError('Error deleting prediction', 'DELETE_ERROR');
+    } finally {
+      prisma.$disconnect();
+    }
   });
 
 export const verifyPrediction = actionClient

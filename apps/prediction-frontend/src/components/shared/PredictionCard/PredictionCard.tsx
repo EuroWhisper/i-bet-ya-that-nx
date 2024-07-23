@@ -1,14 +1,44 @@
-import { Card, Stack, Text } from '@i-bet-ya-that-nx/ui-common';
+import {
+  Button,
+  Card,
+  Spinner,
+  Stack,
+  Text,
+} from '@i-bet-ya-that-nx/ui-common';
+import { TrashIcon } from 'lucide-react';
 
 type Props = {
+  id: number;
   email: string;
   prediction: string;
   date: string;
+  isDeleting?: boolean;
+  onDelete?: (id: number) => void;
 };
 
-export const PredictionCard = ({ email, prediction, date }: Props) => {
+export const PredictionCard = ({
+  id,
+  email,
+  prediction,
+  date,
+  isDeleting,
+  onDelete,
+}: Props) => {
   return (
-    <Card>
+    <Card className="relative">
+      {onDelete && (
+        <div className="absolute right-2 top-2">
+          <Button
+            className="size-4"
+            disabled={isDeleting}
+            size="icon"
+            variant="ghost"
+            onClick={() => onDelete(id)}
+          >
+            {isDeleting ? <Spinner /> : <TrashIcon />}
+          </Button>
+        </div>
+      )}
       <Stack gap={3}>
         <Stack gap={1}>
           <Text
