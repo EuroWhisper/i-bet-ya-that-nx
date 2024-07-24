@@ -1,1 +1,1 @@
-export * from './verifyPrediction/VerifyPredictionContent';
+export * from './verify-prediction/VerifyPredictionContent';

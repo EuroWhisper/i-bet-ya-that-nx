@@ -13,6 +13,7 @@ export * from './lib/Popover/Popover';
 export * from './lib/Sheet/Sheet';
 export * from './lib/Spinner/Spinner';
 export * from './lib/Stack/Stack';
+export * from './lib/Table/Table';
 export * from './lib/Text/Text';
 export * from './lib/Toast/Toast';
 export * from './lib/Toast/ToastViewport';

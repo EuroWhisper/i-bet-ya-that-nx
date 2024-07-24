@@ -60,6 +60,18 @@ export const DesktopNavbar = () => {
               )}
             </NavigationMenuItem>
             <NavigationMenuItem>
+              <Link href="/leaderboard" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={clsx(
+                    navigationMenuTriggerStyle(),
+                    homeNavbarItemStyles
+                  )}
+                >
+                  Leaderboard
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
               <Link href="/about" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={clsx(
