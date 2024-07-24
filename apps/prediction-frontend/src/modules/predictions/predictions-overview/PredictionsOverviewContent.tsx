@@ -7,7 +7,6 @@ import {
   Text,
 } from '@i-bet-ya-that-nx/ui-common';
 import { Prediction } from '@prisma/client';
-import { SessionProvider } from 'next-auth/react';
 import { useAction } from 'next-safe-action/hooks';
 
 import { deletePrediction, verifyPrediction } from '../../..//actions';
@@ -107,9 +106,7 @@ export const PredictionsOverviewContent = ({ predictions }: Props) => {
 
   return (
     <>
-      <SessionProvider>
-        <MainNavigationBar />
-      </SessionProvider>
+      <MainNavigationBar />
       <LayoutSheet>
         <Text className="mt-8 text-center" variant="h1">
           Predictions overview
