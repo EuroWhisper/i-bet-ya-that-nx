@@ -5,15 +5,20 @@ import {
   Stack,
   Text,
 } from '@i-bet-ya-that-nx/ui-common';
+import { VerificationStatus } from '@prisma/client';
 import { TrashIcon } from 'lucide-react';
+
+import { getPredictionStatusText } from '../../../modules/predictions/utils';
 
 type Props = {
   id: number;
   email: string;
   prediction: string;
   date: string;
+  status: VerificationStatus;
   isDeleting?: boolean;
   onDelete?: (id: number) => void;
+  onVerify?: (id: number) => void;
 };
 
 export const PredictionCard = ({
@@ -21,9 +26,15 @@ export const PredictionCard = ({
   email,
   prediction,
   date,
+  status,
   isDeleting,
   onDelete,
+  onVerify,
 }: Props) => {
+  const isVerified =
+    status === VerificationStatus.VERIFIED_CORRECT ||
+    status === VerificationStatus.VERIFIED_INCORRECT;
+
   return (
     <Card className="relative">
       {onDelete && (
@@ -57,6 +68,20 @@ export const PredictionCard = ({
           </Text>
         </div>
       </Stack>
+      {onVerify && (
+        <div className="flex justify-end mt-8">
+          {!isVerified ? (
+            <Button size="sm" variant="outline" onClick={() => onVerify(id)}>
+              Verify
+            </Button>
+          ) : (
+            <Text className="text-gray-400 dark:text-gray-50" variant="small">
+              <span className="font-semibold">Status</span>{' '}
+              {getPredictionStatusText(status)}
+            </Text>
+          )}
+        </div>
+      )}
     </Card>
   );
 };

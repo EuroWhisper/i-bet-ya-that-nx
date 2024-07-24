@@ -6,12 +6,14 @@ type Props = {
   predictions: Prediction[];
   predictionDeletionTargetId?: number;
   onDelete?: (id: number) => void;
+  onVerify?: (id: number) => void;
 };
 
 export const PredictionsList = ({
   predictions,
   predictionDeletionTargetId,
   onDelete,
+  onVerify,
 }: Props) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -23,7 +25,9 @@ export const PredictionsList = ({
           id={prediction.id}
           isDeleting={prediction.id === predictionDeletionTargetId}
           prediction={prediction.prediction}
+          status={prediction.verificationStatus}
           onDelete={onDelete}
+          onVerify={onVerify}
         />
       ))}
     </div>
