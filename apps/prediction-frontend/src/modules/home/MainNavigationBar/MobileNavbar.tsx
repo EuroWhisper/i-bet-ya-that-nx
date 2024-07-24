@@ -32,6 +32,7 @@ export const MobileNavbar = () => {
         <Stack className="mt-4" gap={4}>
           <Link href="/">Home</Link>
           {isSignedIn && <Link href="/predictions">Predictions</Link>}
+          <Link href="/leaderboard">Leaderboard</Link>
           <Link href="/about">About</Link>
           <ThemeToggle />
         </Stack>
