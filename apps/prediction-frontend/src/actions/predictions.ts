@@ -14,6 +14,8 @@ import { actionClient, CustomError } from '../utils/action-client';
 export const createPrediction = actionClient
   .schema(predictionSchema)
   .action(async ({ parsedInput: { prediction, confirmationDate, email } }) => {
+    const session = await auth();
+
     const prisma = new PrismaClient();
 
     await prisma.prediction.create({
@@ -21,6 +23,7 @@ export const createPrediction = actionClient
         prediction: prediction,
         email: email,
         reminderDate: confirmationDate,
+        userId: session?.user?.id,
       },
     });
     revalidateTag('predictions');

@@ -28,12 +28,27 @@ export const getLeaderboard = cache(
       },
     });
 
+    const userEmails = rawLeaderboard.map((item) => item.email) ?? [];
+
+    const users = await prisma.user.findMany({
+      where: {
+        email: {
+          in: userEmails,
+        },
+      },
+      select: {
+        email: true,
+        nickname: true,
+      },
+    });
+
+    const userMap = users.reduce((acc: { [key: string]: string }, user) => {
+      acc[user.email] = user.nickname;
+      return acc;
+    }, {});
+
     const leaderboard = rawLeaderboard.map((item) => ({
-      email: item.email.replace(
-        /^(.)(.*)(.@.*)$/,
-        (_, first, middle, last) =>
-          `${first}${middle.replace(/./g, '*')}${last}`
-      ),
+      nickname: userMap[item.email],
       count: item._count.prediction,
     }));
 

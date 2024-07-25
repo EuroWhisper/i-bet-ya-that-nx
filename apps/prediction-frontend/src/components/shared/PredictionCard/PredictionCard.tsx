@@ -12,7 +12,7 @@ import { getPredictionStatusText } from '../../../modules/predictions/utils';
 
 type Props = {
   id: number;
-  email: string;
+  nickname: string;
   prediction: string;
   date: string;
   status: VerificationStatus;
@@ -23,7 +23,7 @@ type Props = {
 
 export const PredictionCard = ({
   id,
-  email,
+  nickname,
   prediction,
   date,
   status,
@@ -56,7 +56,7 @@ export const PredictionCard = ({
             className="text-gray-600 dark:text-gray-200 font-bold"
             variant="small"
           >
-            {email}
+            {nickname}
           </Text>
           <Text className="text-gray-400 dark:text-gray-50" variant="xs">
             {date}

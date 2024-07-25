@@ -24,15 +24,15 @@ export const LeaderboardTable = ({ leaderboard }: Props) => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Rank</TableHead>
-          <TableHead>Email</TableHead>
+          <TableHead>User</TableHead>
           <TableHead className="text-right">{categoryHeading}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {leaderboard.rankings.map((ranking, index) => (
-          <TableRow key={ranking.email}>
+          <TableRow key={ranking.nickname}>
             <TableCell className="font-medium">{index + 1}</TableCell>
-            <TableCell>{ranking.email}</TableCell>
+            <TableCell>{ranking.nickname}</TableCell>
             <TableCell className="text-right">{ranking.count}</TableCell>
           </TableRow>
         ))}

@@ -1,5 +1,5 @@
+import { PredictionWithUser } from '@i-bet-ya-that-nx/prisma-shared';
 import { LayoutSheet, Text } from '@i-bet-ya-that-nx/ui-common';
-import { Prediction } from '@prisma/client';
 
 import { PageSection } from '../../components/shared/PageSection/PageSection';
 import { PredictionsList } from '../../components/shared/PredictionsList/PredictionsList';
@@ -7,7 +7,7 @@ import { PredictionsList } from '../../components/shared/PredictionsList/Predict
 import { HomeHeader } from './HomeHeader';
 
 type Props = {
-  existingPredictions: Prediction[] | null;
+  existingPredictions: PredictionWithUser[] | null;
   predictionSuggestion: string;
 };
 

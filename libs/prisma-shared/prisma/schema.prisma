@@ -21,6 +21,8 @@ model Prediction {
   updatedAt    DateTime @default(now())
   prediction   String
   email        String
+  userId       String? 
+  user         User?   @relation(fields: [userId], references: [id])
   reminderDate DateTime
   verificationStatus VerificationStatus @default(PENDING)
   verificationToken  String  @default(dbgenerated("gen_random_uuid()")) @unique
@@ -35,6 +37,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   nickname      String @default(dbgenerated("gen_random_uuid()")) @unique
+  predictions   Prediction[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  

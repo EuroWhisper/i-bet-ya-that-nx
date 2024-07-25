@@ -1,5 +1,5 @@
 type Ranking = {
-  email: string;
+  nickname: string;
   count: number;
 };
 

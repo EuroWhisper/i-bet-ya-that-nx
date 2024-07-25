@@ -1,9 +1,9 @@
-import { Prediction } from '@prisma/client';
+import { PredictionWithUser } from '@i-bet-ya-that-nx/prisma-shared';
 
 import { formatDate } from '../../../utils';
 import { PredictionCard } from '../PredictionCard/PredictionCard';
 type Props = {
-  predictions: Prediction[];
+  predictions: PredictionWithUser[];
   predictionDeletionTargetId?: number;
   onDelete?: (id: number) => void;
   onVerify?: (id: number) => void;
@@ -21,9 +21,9 @@ export const PredictionsList = ({
         <PredictionCard
           key={prediction.id}
           date={formatDate(prediction.reminderDate)}
-          email={prediction.email}
           id={prediction.id}
           isDeleting={prediction.id === predictionDeletionTargetId}
+          nickname={prediction.user?.nickname || 'Anonymous'}
           prediction={prediction.prediction}
           status={prediction.verificationStatus}
           onDelete={onDelete}
