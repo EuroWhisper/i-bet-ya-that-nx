@@ -34,6 +34,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  nickname      String @default(dbgenerated("gen_random_uuid()")) @unique
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  

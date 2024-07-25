@@ -1,1 +1,1 @@
-export { PrismaClient, type Prediction } from '@prisma/client';
+export { PrismaClient, type Prediction, type User } from '@prisma/client';
