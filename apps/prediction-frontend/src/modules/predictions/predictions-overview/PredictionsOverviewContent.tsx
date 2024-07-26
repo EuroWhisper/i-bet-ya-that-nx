@@ -1,12 +1,12 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { PredictionWithUser } from '@i-bet-ya-that-nx/prisma-shared';
 import {
   ConfirmationDialog,
   LayoutSheet,
   Text,
 } from '@i-bet-ya-that-nx/ui-common';
-import { Prediction } from '@prisma/client';
 import { useAction } from 'next-safe-action/hooks';
 
 import { deletePrediction, verifyPrediction } from '../../..//actions';
@@ -15,7 +15,7 @@ import { PredictionsList } from '../../../components/shared/PredictionsList/Pred
 import { MainNavigationBar } from '../../home/MainNavigationBar/MainNavigationBar';
 
 type Props = {
-  predictions?: Prediction[];
+  predictions?: PredictionWithUser[];
 };
 
 export const PredictionsOverviewContent = ({ predictions }: Props) => {
