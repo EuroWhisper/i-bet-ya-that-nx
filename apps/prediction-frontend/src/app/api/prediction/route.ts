@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+
+import { prisma } from '../../../utils/db';
 
 export async function GET() {
-  const prisma = new PrismaClient();
-
   try {
     const predictions = await prisma.prediction.findMany();
     return NextResponse.json(predictions);

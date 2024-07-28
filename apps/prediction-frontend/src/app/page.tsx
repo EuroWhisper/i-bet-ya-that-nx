@@ -1,9 +1,9 @@
 import { type Metadata } from 'next';
 import { unstable_cache as cache } from 'next/cache';
 import { getPredictionSuggestion } from '@i-bet-ya-that-nx/chatgpt';
-import { PrismaClient } from '@prisma/client';
 
 import { HomeContent } from '../modules/home/HomeContent';
+import { prisma } from '../utils/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,8 +23,6 @@ const getData = async () => {
 
 const getExistingPredictions = cache(
   async (take: number) => {
-    const prisma = new PrismaClient();
-
     try {
       const predictions = await prisma.prediction.findMany({
         take,

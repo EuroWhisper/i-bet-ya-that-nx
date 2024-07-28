@@ -1,11 +1,10 @@
 'use server';
 
 import { faker } from '@faker-js/faker';
-import { PrismaClient } from '@prisma/client';
+
+import { prisma } from '../utils/db';
 
 export const generateRandomNickname = async (email: string) => {
-  const prisma = new PrismaClient();
-
   let randomNickname = '';
   let isNicknameUnique = false;
 

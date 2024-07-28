@@ -1,10 +1,9 @@
 import { unstable_cache as cache } from 'next/cache';
-import { PrismaClient } from '@prisma/client';
+
+import { prisma } from '../utils/db';
 
 export const getPredictionsByEmail = cache(
   async (userEmail: string) => {
-    const prisma = new PrismaClient();
-
     try {
       const predictions = await prisma.prediction.findMany({
         where: { email: userEmail },
@@ -23,7 +22,6 @@ export const getPredictionsByEmail = cache(
 
 export const getPredictionById = cache(
   async (predictionId: string) => {
-    const prisma = new PrismaClient();
     try {
       const prediction = await prisma.prediction.findUnique({
         where: {
