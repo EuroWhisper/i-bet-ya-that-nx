@@ -1,12 +1,11 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
 import NextAuth, { User } from 'next-auth';
 import { type Adapter } from 'next-auth/adapters';
 import Google from 'next-auth/providers/google';
 
 import { generateRandomNickname } from '../actions/user';
 
-const prisma = new PrismaClient();
+import { prisma } from './db';
 
 const config = {
   adapter: PrismaAdapter(prisma) as Adapter,

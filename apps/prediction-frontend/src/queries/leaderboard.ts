@@ -1,13 +1,12 @@
 import { unstable_cache as cache } from 'next/cache';
-import { PrismaClient, VerificationStatus } from '@prisma/client';
+import { VerificationStatus } from '@prisma/client';
 
 import { type DateRangeType, getDateRange } from '../utils';
+import { prisma } from '../utils/db';
 
 export const getLeaderboard = cache(
   async (rangeType: DateRangeType, verificationStatus: VerificationStatus) => {
     const { startDate, endDate } = getDateRange(rangeType);
-
-    const prisma = new PrismaClient();
 
     const rawLeaderboard = await prisma.prediction.groupBy({
       by: ['email'],

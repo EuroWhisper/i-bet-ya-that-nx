@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidateTag } from 'next/cache';
-import { PrismaClient, VerificationStatus } from '@prisma/client';
+import { VerificationStatus } from '@prisma/client';
 
 import {
   deletePredictionSchema,
@@ -10,13 +10,12 @@ import {
 } from '../modules/home/predictionSchema';
 import { auth } from '../utils';
 import { actionClient, CustomError } from '../utils/action-client';
+import { prisma } from '../utils/db';
 
 export const createPrediction = actionClient
   .schema(predictionSchema)
   .action(async ({ parsedInput: { prediction, confirmationDate, email } }) => {
     const session = await auth();
-
-    const prisma = new PrismaClient();
 
     await prisma.prediction.create({
       data: {
@@ -40,8 +39,6 @@ export const deletePrediction = actionClient
       throw new CustomError('User is not signed in', 'UNAUTHENTICATED');
     }
 
-    const prisma = new PrismaClient();
-
     try {
       await prisma.prediction.delete({
         where: { id: id, email: session.user.email },
@@ -58,8 +55,6 @@ export const deletePrediction = actionClient
 export const verifyPrediction = actionClient
   .schema(verificationSchema)
   .action(async ({ parsedInput: { id, isCorrect } }) => {
-    const prisma = new PrismaClient();
-
     const verificationStatus = isCorrect
       ? VerificationStatus.VERIFIED_CORRECT
       : VerificationStatus.VERIFIED_INCORRECT;
