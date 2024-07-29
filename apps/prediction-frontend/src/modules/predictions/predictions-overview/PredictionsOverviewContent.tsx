@@ -12,7 +12,7 @@ import { useAction } from 'next-safe-action/hooks';
 import { deletePrediction, verifyPrediction } from '../../..//actions';
 import { useNotification } from '../../..//hooks';
 import { PredictionsList } from '../../../components/shared/PredictionsList/PredictionsList';
-import { MainNavigationBar } from '../../home/MainNavigationBar/MainNavigationBar';
+import { SharedLayout } from '../../../components/shared/SharedLayout/SharedLayout';
 
 type Props = {
   predictions?: PredictionWithUser[];
@@ -105,8 +105,7 @@ export const PredictionsOverviewContent = ({ predictions }: Props) => {
   };
 
   return (
-    <>
-      <MainNavigationBar />
+    <SharedLayout>
       <LayoutSheet>
         <Text className="mt-8 text-center" variant="h1">
           Predictions overview
@@ -137,6 +136,6 @@ export const PredictionsOverviewContent = ({ predictions }: Props) => {
         title="Was your prediction correct?"
         onClose={() => setIsVerifyConfirmationDialogOpen(false)}
       />
-    </>
+    </SharedLayout>
   );
 };

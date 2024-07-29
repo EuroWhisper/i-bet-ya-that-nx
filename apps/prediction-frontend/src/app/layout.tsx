@@ -2,7 +2,6 @@ import { Inter } from 'next/font/google';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 
-import { Footer } from '../components/shared/Footer/Footer';
 import { Providers } from '../context/providers';
 import { auth } from '../utils';
 
@@ -30,13 +29,10 @@ export default async function RootLayout({
       <body
         className={clsx(
           inter.className,
-          'min-h-screen bg-background antialiased'
+          'min-h-screen bg-background antialiased h-full'
         )}
       >
-        <Providers session={session}>
-          {children}
-          <Footer />
-        </Providers>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

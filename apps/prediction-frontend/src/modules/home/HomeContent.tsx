@@ -3,6 +3,7 @@ import { LayoutSheet, Text } from '@i-bet-ya-that-nx/ui-common';
 
 import { PageSection } from '../../components/shared/PageSection/PageSection';
 import { PredictionsList } from '../../components/shared/PredictionsList/PredictionsList';
+import { SharedLayout } from '../../components/shared/SharedLayout/SharedLayout';
 
 import { HomeHeader } from './HomeHeader';
 
@@ -13,7 +14,7 @@ type Props = {
 
 const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
   return (
-    <main>
+    <SharedLayout>
       <HomeHeader predictionSuggestion={predictionSuggestion} />
       <LayoutSheet className="mb-8">
         {existingPredictions && (
@@ -48,7 +49,7 @@ const HomeContent = ({ existingPredictions, predictionSuggestion }: Props) => {
           </Text>
         </PageSection>
       </LayoutSheet>
-    </main>
+    </SharedLayout>
   );
 };
 
