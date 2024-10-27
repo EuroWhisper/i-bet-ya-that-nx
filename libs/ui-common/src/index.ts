@@ -1,3 +1,4 @@
+export * from './lib/Avatar/Avatar';
 export * from './lib/Button/Button';
 export * from './lib/Calendar/Calendar';
 export * from './lib/Card/Card';

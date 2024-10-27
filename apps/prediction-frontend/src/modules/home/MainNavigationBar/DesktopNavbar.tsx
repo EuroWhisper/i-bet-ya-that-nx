@@ -45,20 +45,34 @@ export const DesktopNavbar = () => {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              {isSignedIn && (
-                <Link href="/predictions" legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={clsx(
-                      navigationMenuTriggerStyle(),
-                      homeNavbarItemStyles
-                    )}
-                  >
-                    Predictions
-                  </NavigationMenuLink>
-                </Link>
-              )}
-            </NavigationMenuItem>
+            {isSignedIn && (
+              <>
+                <NavigationMenuItem>
+                  <Link href="/profile" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={clsx(
+                        navigationMenuTriggerStyle(),
+                        homeNavbarItemStyles
+                      )}
+                    >
+                      Profile
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/predictions" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={clsx(
+                        navigationMenuTriggerStyle(),
+                        homeNavbarItemStyles
+                      )}
+                    >
+                      Predictions
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </>
+            )}
             <NavigationMenuItem>
               <Link href="/leaderboard" legacyBehavior passHref>
                 <NavigationMenuLink
