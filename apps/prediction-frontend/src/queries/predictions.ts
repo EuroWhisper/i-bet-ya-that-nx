@@ -1,12 +1,16 @@
 import { unstable_cache as cache } from 'next/cache';
 
+import { Filters } from '../modules/filters/FiltersPredictionsProvider';
 import { prisma } from '../utils/db';
 
 export const getPredictionsByEmail = cache(
-  async (userEmail: string) => {
+  async (userEmail: string, filters: Filters) => {
     try {
       const predictions = await prisma.prediction.findMany({
-        where: { email: userEmail },
+        where: {
+          email: userEmail,
+          verificationStatus: filters.verificationStatus,
+        },
         orderBy: { createdAt: 'desc' },
         include: { user: true },
       });

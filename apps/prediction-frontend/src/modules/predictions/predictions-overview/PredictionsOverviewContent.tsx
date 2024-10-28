@@ -13,12 +13,22 @@ import { deletePrediction, verifyPrediction } from '../../..//actions';
 import { useNotification } from '../../..//hooks';
 import { PredictionsList } from '../../../components/shared/PredictionsList/PredictionsList';
 import { SharedLayout } from '../../../components/shared/SharedLayout/SharedLayout';
+import {
+  Filters,
+  FiltersPredictionsProvider,
+} from '../../filters/FiltersPredictionsProvider';
+
+import { PredictionsOverviewFilterBar } from './PredictionsOverviewFilterBar';
 
 type Props = {
   predictions?: PredictionWithUser[];
+  initialFilters?: Filters;
 };
 
-export const PredictionsOverviewContent = ({ predictions }: Props) => {
+export const PredictionsOverviewContent = ({
+  predictions,
+  initialFilters,
+}: Props) => {
   const notify = useNotification();
   const { executeAsync } = useAction(deletePrediction, {
     onSuccess: ({ data }) => {
@@ -105,37 +115,42 @@ export const PredictionsOverviewContent = ({ predictions }: Props) => {
   };
 
   return (
-    <SharedLayout>
-      <LayoutSheet>
-        <Text className="mt-8 text-center" variant="h1">
-          Predictions overview
-        </Text>
-        {predictions && (
+    <FiltersPredictionsProvider initialFilters={initialFilters}>
+      <SharedLayout>
+        <LayoutSheet>
+          <Text className="mt-8 text-center" variant="h1">
+            Predictions overview
+          </Text>
           <section className="my-8">
-            <PredictionsList
-              predictionDeletionTargetId={predictionDeletionTargetId}
-              predictions={predictions}
-              onDelete={handleDeletePrediction}
-              onVerify={(id) => {
-                setPredictionVerificationTargetId(id);
-                setIsVerifyConfirmationDialogOpen(true);
-              }}
-            />
+            <PredictionsOverviewFilterBar />
           </section>
-        )}
-      </LayoutSheet>
-      <ConfirmationDialog
-        description="If you were correct in your prediction, verify it as correct to earn points"
-        isPrimaryLoading={isVerifyCorrectLoading}
-        isSecondaryLoading={isVerifyIncorrectLoading}
-        open={isVerifyConfirmationDialogOpen}
-        primaryAction={() => handleConfirmVerifyPrediction(true)}
-        primaryActionLabel="Correct"
-        secondaryAction={() => handleConfirmVerifyPrediction(false)}
-        secondaryActionLabel="Incorrect"
-        title="Was your prediction correct?"
-        onClose={() => setIsVerifyConfirmationDialogOpen(false)}
-      />
-    </SharedLayout>
+          {predictions && (
+            <section className="my-8">
+              <PredictionsList
+                predictionDeletionTargetId={predictionDeletionTargetId}
+                predictions={predictions}
+                onDelete={handleDeletePrediction}
+                onVerify={(id) => {
+                  setPredictionVerificationTargetId(id);
+                  setIsVerifyConfirmationDialogOpen(true);
+                }}
+              />
+            </section>
+          )}
+        </LayoutSheet>
+        <ConfirmationDialog
+          description="If you were correct in your prediction, verify it as correct to earn points"
+          isPrimaryLoading={isVerifyCorrectLoading}
+          isSecondaryLoading={isVerifyIncorrectLoading}
+          open={isVerifyConfirmationDialogOpen}
+          primaryAction={() => handleConfirmVerifyPrediction(true)}
+          primaryActionLabel="Correct"
+          secondaryAction={() => handleConfirmVerifyPrediction(false)}
+          secondaryActionLabel="Incorrect"
+          title="Was your prediction correct?"
+          onClose={() => setIsVerifyConfirmationDialogOpen(false)}
+        />
+      </SharedLayout>
+    </FiltersPredictionsProvider>
   );
 };

@@ -1,5 +1,6 @@
 import { type Metadata } from 'next';
 import { redirect } from 'next/navigation';
+import { VerificationStatus } from '@prisma/client';
 
 import { PredictionsOverviewContent } from '../../modules/predictions/predictions-overview/PredictionsOverviewContent';
 import { getPredictionsByEmail } from '../../queries';
@@ -9,14 +10,38 @@ export const metadata: Metadata = {
   title: 'I Bet Ya That - Predictions',
 };
 
-export default async function PredictionsPage() {
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+export default async function PredictionsPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
   const session = await auth();
 
   if (!session?.user?.email) {
     return redirect('/');
   }
 
-  const predictions = await getPredictionsByEmail(session.user.email);
+  const searchParameters = await searchParams;
 
-  return <PredictionsOverviewContent predictions={predictions} />;
+  const getFiltersFromSearchParams = () => {
+    const filters = {
+      verificationStatus:
+        searchParameters.verificationStatus as VerificationStatus,
+    };
+
+    return filters;
+  };
+
+  const filters = getFiltersFromSearchParams();
+
+  const predictions = await getPredictionsByEmail(session.user.email, filters);
+
+  return (
+    <PredictionsOverviewContent
+      predictions={predictions}
+      initialFilters={filters}
+    />
+  );
 }
